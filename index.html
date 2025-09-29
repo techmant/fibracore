@@ -144,14 +144,6 @@
       transition: transform 0.6s ease, filter 0.6s ease;
     }
 
-/* Tamaño base en móviles */
-@media (max-width: 768px) {
-  .character {
-    width: 52%; /* Aumentado de 46% a 52% */
-    bottom: 74px; /* Ajuste fino si es necesario */
-  }
-}
-
     .character {
       position: absolute;
       bottom: 70px;
@@ -171,7 +163,7 @@
     @media (hover: hover) and (pointer: fine) {
       .wrapper:hover ~ .character,
       .wrapper:focus ~ .character {
-        transform: translateX(-50%) scale(1.60) translateY(-36px);
+        transform: translateX(-50%) scale(1.35) translateY(-36px);
       }
     }
 
@@ -636,88 +628,35 @@
     });
 
     // Soporte táctil: agregar/retirar clase 'touched' en touchstart/touchend (copiado del archivo)
-   // === Efecto mejorado para móviles: figura 3D más grande ===
-document.addEventListener('DOMContentLoaded', function() {
-  const wrappers = document.querySelectorAll('.wrapper');
-  const characters = document.querySelectorAll('.character');
+    (function() {
+      if (!('ontouchstart' in window)) return;
+      const wrappers = document.querySelectorAll('.wrapper');
 
-  const wrapperToCharacter = {};
-  wrappers.forEach((wrapper, index) => {
-    wrapperToCharacter[wrapper] = characters[index];
-  });
+      wrappers.forEach(wrapper => {
+        let isTouching = false;
 
-  // Detectar si es móvil/táctil
-  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        wrapper.addEventListener('touchstart', function(e) {
+          isTouching = true;
+          this.classList.add('touched');
+        }, { passive: true });
 
-  wrappers.forEach(wrapper => {
-    const character = wrapperToCharacter[wrapper];
-    if (!character) return;
-
-    // Escalas según dispositivo
-    const scaleMobile = 1.6;   // Más grande en móvil
-    const scaleDesktop = 1.35; // Escala normal en escritorio
-    const translateYMobile = -42; // Más elevación en móvil
-    const translateYDesktop = -36;
-
-    const useMobileScale = isMobile;
-    const targetScale = useMobileScale ? scaleMobile : scaleDesktop;
-    const targetTranslateY = useMobileScale ? translateYMobile : translateYDesktop;
-
-    // --- MOUSE (solo escritorio) ---
-    if (!isMobile) {
-      wrapper.addEventListener('mouseenter', () => {
-        wrapper.style.transform = 'perspective(900px) translateY(-6%) rotateX(20deg)';
-        wrapper.style.boxShadow = '0 40px 60px rgba(0, 0, 0, 0.75)';
-        setTimeout(() => {
-          character.style.transform = `translateX(-50%) scale(${scaleDesktop}) translateY(${translateYDesktop}px)`;
-        }, 100);
-      });
-
-      wrapper.addEventListener('mouseleave', () => {
-        character.style.transform = 'translateX(-50%) scale(0.86)';
-        setTimeout(() => {
-          wrapper.style.transform = 'none';
-          wrapper.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.55)';
-        }, 100);
-      });
-    }
-
-    // --- TOUCH (móvil/tablet) ---
-    if (isMobile) {
-      let isTouching = false;
-
-      wrapper.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        isTouching = true;
-        wrapper.style.transform = 'perspective(900px) translateY(-6%) rotateX(20deg)';
-        wrapper.style.boxShadow = '0 40px 60px rgba(0, 0, 0, 0.75)';
-        setTimeout(() => {
+        wrapper.addEventListener('touchmove', function(e) {
           if (isTouching) {
-            character.style.transform = `translateX(-50%) scale(${scaleMobile}) translateY(${translateYMobile}px)`;
+            this.classList.add('touched');
           }
-        }, 100);
-      });
+        }, { passive: true });
 
-      const resetEffects = () => {
-        character.style.transform = 'translateX(-50%) scale(0.86)';
-        setTimeout(() => {
-          wrapper.style.transform = 'none';
-          wrapper.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.55)';
-        }, 100);
-      };
+        wrapper.addEventListener('touchend', function(e) {
+          isTouching = false;
+          setTimeout(() => { this.classList.remove('touched'); }, 300);
+        }, { passive: true });
 
-      wrapper.addEventListener('touchend', () => {
-        isTouching = false;
-        resetEffects();
+        wrapper.addEventListener('touchcancel', function(e) {
+          isTouching = false;
+          this.classList.remove('touched');
+        }, { passive: true });
       });
-
-      wrapper.addEventListener('touchcancel', () => {
-        isTouching = false;
-        resetEffects();
-      });
-    }
-  });
-});
+    })();
 
     // Año actual en footer
     document.getElementById('y').textContent = new Date().getFullYear();
