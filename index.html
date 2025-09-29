@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SeguridadTotal — Efectos Techmants</title>
+
+  <!-- Tailwind (estilos utilitarios) + FontAwesome para iconos sociales -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    /* =========================
+       Estilos copiados del archivo suministrado (efecto relieve + botón)
+       ========================= */
+
+    :root {
+      --card-radius: 16px;
+      --primary-blue: #2563eb;
+    }
+
+    /* ====== Botón flotante (imagen) + social menu ====== */
+    .floating-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 65px;
+      height: 65px;
+      background: linear-gradient(145deg, #007bff, #00d4ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4), 0 0 20px rgba(0,183,255,0.8);
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+    .floating-btn:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 30px rgba(0,255,200,0.9);
+    }
+    .floating-btn-img {
+      width: 70%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 50%;
+      pointer-events: none;
+      display:block;
+    }
+
+    .social-menu {
+      position: fixed;
+      bottom: 57px;
+      right: 57px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+    }
+    .social-menu li {
+      position: absolute;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.4s ease;
+    }
+    .social-menu li a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #444, #111);
+      color: #fff;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 15px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+    .social-menu li a:hover {
+      background: linear-gradient(145deg, #ff0080, #7928ca);
+      transform: scale(1.2) rotate(10deg);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 20px rgba(255,0,200,0.9);
+    }
+
+    .social-menu.active li {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    /* posiciones cuando está activo (cuatro iconos alrededor) */
+    .social-menu.active li:nth-child(1) { transform: translate(-100px, -20px); }
+    .social-menu.active li:nth-child(2) { transform: translate(-70px, -90px); }
+    .social-menu.active li:nth-child(3) { transform: translate(0px, -120px); }
+    .social-menu.active li:nth-child(4) { transform: translate(70px, -90px); }
+
+    /* ====== NUEVO EFECTO RELIEVE TARJETAS (REEMPLAZA EL FLIP) ====== */
+    .card-container {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 420px;
+      perspective: 900px;
+      margin: 0 auto;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: all 0.5s ease;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+      border: 3px solid rgba(255,255,255,0.04);
+      z-index: 1;
+      cursor: pointer;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+      display:block;
+    }
+
+    /* Hover (sólo desktop con puntero) */
+    @media (hover: hover) and (pointer: fine) {
+      .wrapper:hover {
+        transform: perspective(900px) translateY(-6%) rotateX(20deg);
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.75);
+      }
+      .wrapper:hover .background {
+        transform: scale(1.06);
+        filter: brightness(0.95) contrast(1.05);
+      }
+    }
+
+    .background {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform-origin: center;
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    .character {
+      position: absolute;
+      bottom: 70px;
+      left: 50%;
+      width: 46%;
+      max-width: 240px;
+      min-width: 96px;
+      height: auto;
+      transform: translateX(-50%) scale(0.86);
+      transition: all 0.55s cubic-bezier(.2,9,3,1);
+      z-index: 6;
+      pointer-events: none;
+      filter: drop-shadow(0 25px 40px rgba(0,0,0,0.6));
+    }
+
+    /* On hover: escala la figura (la que parece 3D) */
+    @media (hover: hover) and (pointer: fine) {
+      .wrapper:hover ~ .character,
+      .wrapper:focus ~ .character {
+        transform: translateX(-50%) scale(1.35) translateY(-36px);
+      }
+    }
+
+    /* Botón central (Ver Planes) dentro de la tarjeta */
+    .platform-logo {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      height: 48px;
+      z-index: 10;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+      transition: transform 0.2s ease;
+    }
+    .platform-logo:hover { transform: scale(1.06); }
+
+    .btn-ver-planes {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, #e50914, #ff6a00);
+      color: #fff;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      z-index: 11;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+    }
+    .btn-ver-planes:hover { transform: translateX(-50%) scale(1.06); box-shadow: 0 12px 36px rgba(0,0,0,0.65); }
+
+    /* Responsive adjustments for tarjetas */
+    @media (max-width: 1024px) {
+      .card-container { max-width: 360px; height: 420px; }
+      .character { width: 48%; bottom: 70px; }
+    }
+    @media (max-width: 520px) {
+      .card-container { max-width: 100%; height: 380px; }
+      .character { width: 46%; bottom: 66px; }
+      .btn-ver-planes { padding: 8px 16px; font-size: 13px; }
+    }
+
+    /* Mejora táctil: aplicar clase 'touched' cuando el usuario toque la tarjeta */
+    @media (hover: none) and (pointer: coarse) {
+      .wrapper.touched { transform: perspective(900px) translateY(-6%) rotateX(20deg) !important; box-shadow: 0 40px 60px rgba(0,0,0,0.75) !important; }
+      .wrapper.touched .background { transform: scale(1.06) !important; filter: brightness(0.95) contrast(1.05) !important; }
+      .wrapper.touched ~ .character { transform: translateX(-50%) scale(1.35) translateY(-36px) !important; }
+    }
+
+    /* pequeños ajustes visuales */
+    .service-title { text-shadow: 0 4px 18px rgba(0,0,0,0.5); }
+
+
+    /* =============== Estilos Personalizados para este Sitio =============== */
+    /* Header mejorado */
+    header {
+      background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.35), transparent);
+      backdrop-filter: saturate(150%) blur(6px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Animación para el título en el header */
+    .dynamic-blue-text {
+      animation: glowBlue 3s ease-in-out infinite;
+    }
+    @keyframes glowBlue {
+      0% { text-shadow: 0 0 6px rgba(37, 99, 235, .35); }
+      50% { text-shadow: 0 0 20px rgba(37, 99, 235, .8), 0 0 30px rgba(37, 99, 235, .55); }
+      100% { text-shadow: 0 0 6px rgba(37, 99, 235, .35); }
+    }
+
+    /* Menú de navegación con efecto */
+    .nav-link {
+      position: relative;
+      padding: 4px 0;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-blue);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Botones con efectos mejorados */
+    .btn-animated {
+      background: linear-gradient(135deg, var(--primary-blue), #0ef);
+      color: #001018;
+      font-weight: 800;
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, .25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-animated:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, .4);
+    }
+
+    /* Botones secundarios */
+    .btn-secondary {
+      background: linear-gradient(135deg, #232a37, #121720);
+      color: #e8eef6;
+      box-shadow: none;
+      border: 1px solid #374151;
+    }
+    .btn-secondary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    /* Input y select del formulario */
+    .form-input, .form-select {
+      transition: all 0.2s ease;
+      border: 1px solid #cbd5e1;
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* =============== NUEVOS ESTILOS PARA EL EFECTO DE TEXTO DINÁMICO Y FONDO FLAMEANTE =============== */
+    /* Fondo flameante para la sección HERO */
+    .hero-flame-bg {
+      background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa, #1e40af);
+      background-size: 400% 400%;
+      animation: gradientFlame 15s ease infinite;
+    }
+    @keyframes gradientFlame {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Texto dinámico que cambia las palabras */
+    .dynamic-services {
+      color: #ffffff;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #e5e7eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glowServices 3s ease-in-out infinite;
+    }
+    @keyframes glowServices {
+      0% { text-shadow: 0 0 6px rgba(255, 255, 255, .35); }
+      50% { text-shadow: 0 0 20px rgba(255, 255, 255, .8), 0 0 30px rgba(255, 255, 255, .55); }
+      100% { text-shadow: 0 0 6px rgba(255, 255, 255, .35); }
+    }
+
+    .image-item {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.image-item:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* Estilo para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .image-item {
+    /* Ajustes específicos para móvil si es necesario */
+  }
+}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- HEADER (sencillo) -->
+  <header class="bg-white shadow sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-600 p-2 rounded-lg">
+         <img src="https://i.imgur.com/lHr7mib.png" alt="Logo de SeguridadTotal" class="w-7 h-7 object-contain">
+        </div>
+        <div>
+          <h1 class="text-xl font-bold dynamic-blue-text">FIBRACORE</h1>
+          <div class="text-xs text-gray-500">Soluciones Profesionales</div>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex gap-8">
+        <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
+        <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
+        <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
+        <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+    <!-- HERO -->
+<section id="inicio" class="hero-flame-bg text-white py-20 text-center">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl md:text-6xl font-bold mb-4">Tecnología Integral para tu <span class="text-yellow-400 block">Hogar y Negocio</span></h2>
+    <!-- El script reemplazará TODO este span con el HTML completo de cada frase -->
+    <p class="max-w-3xl mx-auto text-lg md:text-xl mb-6">
+      <span id="dynamicServiceContainer"></span>
+    </p>
+    <a href="#contacto" class="btn-animated">
+      Solicitar Cotización <i class="fas fa-arrow-right ml-3"></i>
+    </a>
+  </div>
+</section>
+
+  <!-- STATS -->
+  <section class="py-10 bg-white">
+    <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div><div class="text-3xl font-bold text-blue-600">100+</div><div class="text-sm text-gray-600">Clientes Sastifechos</div></div>
+      <div><div class="text-3xl font-bold text-blue-600">10+</div><div class="text-sm text-gray-600">Años de Experiencia</div></div>
+      <div><div class="text-3xl font-bold text-blue-600">24/7</div><div class="text-sm text-gray-600">Soporte Técnico</div></div>
+      <div><div class="text-3xl font-bold text-blue-600">100%</div><div class="text-sm text-gray-600">Garantía de Servicio</div></div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS: cada tarjeta usa el efecto extraído del archivo -->
+  <section id="servicios" class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h3 class="text-3xl font-bold mb-2">Nuestros Servicios</h3>
+        <p class="text-gray-600 max-w-2xl mx-auto">Ofrecemos soluciones integrales de seguridad y tecnología para proteger lo que más valoras</p>
+      </div>
+
+      <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <!-- 1) Cámaras -->
+        <div class="card-container mx-auto">
+          <div class="wrapper" tabindex="0" aria-label="Cámaras de Seguridad — ver planes">
+            <img class="background" src="https://preview.redd.it/securing-your-home-a-comprehensive-guide-to-the-best-home-v0-74qp5dd59f2c1.jpg?width=640&crop=smart&auto=webp&s=13219603e32204a9ba0b196f0b10dab1820950c4" alt="Cámaras — fondo"/>
+            
+            <button class="btn-ver-planes" data-service="camaras">CCTV e IP</button>
+          </div>
+          <img class="character" src="https://png.pngtree.com/png-clipart/20240921/original/pngtree-cctv-security-camera-hanging-png-image_16057930.png" alt="Cámara 3D"/>
+        </div>
+
+        <!-- 2) Fibra Óptica -->
+        <div class="card-container mx-auto">
+          <div class="wrapper" tabindex="0" aria-label="Fibra Óptica — ver planes">
+            <img class="background" src="https://www.afrontagroup.com/data/fotos/la-oportunidad-del-despliegue-de-ftth66.png" alt="Fibra — fondo"/>
+           
+            <button class="btn-ver-planes" data-service="fibra">Fibra Óptica</button>
+          </div>
+          <img class="character" src="https://png.pngtree.com/png-vector/20250730/ourmid/pngtree-fiber-optic-cable-on-transparent-background-png-image_16916678.webp" alt="Fibra 3D"/>
+        </div>
+
+        <!-- 3) Alarmas -->
+        <div class="card-container mx-auto">
+          <div class="wrapper" tabindex="0" aria-label="Sistemas de Alarma — ver planes">
+            <img class="background" src="https://solutec-latam.com/wp-content/uploads/2019/07/photo-01-1-1.jpg" alt="Alarmas — fondo"/>
+           
+            <button class="btn-ver-planes" data-service="alarmas">Alarmas</button>
+          </div>
+          <img class="character" src="https://www.securicoelectronics.com/wp-content/uploads/2020/10/FIRE-ALARM-SYSTEMS.png" alt="Alarma 3D"/>
+        </div>
+
+        
+
+        <!-- 4) Control de Acceso -->
+        <div class="card-container mx-auto">
+          <div class="wrapper" tabindex="0" aria-label="Control de Acceso — ver planes">
+            <img class="background" src="https://media.istockphoto.com/id/1068548076/es/foto/personal-empuje-hacia-abajo-de-la-m%C3%A1quina-de-control-electr%C3%B3nico-con-barrido-de-dedo-a-la.jpg?s=612x612&w=0&k=20&c=Q7NR2F_ADKRIkcPKqappnMi1FXApYwGnpMgBqrzzzXM=" alt="Acceso — fondo"/>
+            
+            <button class="btn-ver-planes" data-service="acceso">Control de Acceso</button>
+          </div>
+          <img class="character" src="https://skyteksecurity.hn/cdn/shop/products/FCX-FRENTE-p.png?v=1622224535&width=400" alt="Acceso 3D"/>
+        </div>
+
+        
+
+        <!-- 5) Mantenimiento de Equipos -->
+        <div class="card-container mx-auto">
+          <div class="wrapper" tabindex="0" aria-label="Mantenimiento de Equipos — ver planes">
+            <img class="background" src="https://statics.somosjujuy.com.ar/2021/10/crop/63424735e2a90__400x300.webp" alt="Mantenimiento — fondo"/>
+            
+            <button class="btn-ver-planes" data-service="mantenimiento">Mantenimiento PC</button>
+          </div>
+          <img class="character" src="https://png.pngtree.com/png-vector/20220610/ourmid/pngtree-computer-repair-icon-sign-symbol-png-image_4832151.png" alt="PC 3D"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+<section id="nosotros" class="py-16 bg-white">
+  <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h3 class="text-3xl font-bold mb-4">Sobre Nosotros</h3>
+      <p class="text-gray-600 mb-4">Somos una empresa especializada en soluciones de seguridad electrónica y tecnología con más de 10 años de experiencia en el mercado.</p>
+      <p class="text-gray-600">Nuestro compromiso es brindar servicios de alta calidad, utilizando tecnología de vanguardia y un equipo profesional para garantizar tu tranquilidad.</p>
+    </div>
+
+    <!-- Contenedor de imágenes con animación -->
+    <div class="relative">
+      <div id="image-container" class="grid grid-cols-2 gap-4">
+        <!-- Imágenes se cargarán dinámicamente -->
+      </div>
+      <div class="absolute -bottom-6 -right-6 bg-yellow-500 p-4 rounded-lg shadow-lg text-white font-bold">+500 Proyectos</div>
+    </div>
+  </div>
+</section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-8">
+        <h3 class="text-3xl font-bold mb-2">Contáctanos</h3>
+        <p class="max-w-2xl mx-auto">Estamos listos para proteger tu hogar o negocio. Solicita una cotización gratuita hoy mismo.</p>
+      </div>
+      <div class="max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-xl p-6">
+        <form onsubmit="event.preventDefault(); alert('Formulario simulado — reemplaza con tu envío');">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input required class="form-input p-3 rounded-lg bg-white/20 text-white border border-white/20 w-full" placeholder="Nombre completo"/>
+            <input required type="email" class="form-input p-3 rounded-lg bg-white/20 text-white border border-white/20 w-full" placeholder="Correo electrónico"/>
+            <input class="form-input p-3 rounded-lg bg-white/20 text-white border border-white/20 w-full" placeholder="Teléfono"/>
+            <select class="form-select p-3 rounded-lg bg-white/20 text-white border border-white/20 w-full">
+              <option value="">Selecciona un servicio</option>
+              <option value="camaras">Cámaras de Seguridad</option>
+              <option value="fibra">Fibra Óptica</option>
+              <option value="alarmas">Sistema de Alarmas</option>
+              <option value="acceso">Control de Acceso</option>
+              <option value="mantenimiento">Mantenimiento de Equipos</option>
+            </select>
+          </div>
+          <textarea class="form-input w-full mt-4 p-3 rounded-lg bg-white/20 text-white border border-white/20" rows="4" placeholder="Cuéntanos sobre tus necesidades..."></textarea>
+          <div class="mt-4 text-right">
+            <button class="btn-animated">Enviar Mensaje</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <div class="mb-4">
+        <strong>FIBRACORE</strong> — Tu aliado en soluciones de seguridad y tecnología
+      </div>
+      <div class="text-sm text-gray-400">&copy; <span id="y"></span> FIBRACORE. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <!-- ===== Botón flotante y menú social (extraído del archivo que subiste) ===== -->
+  <div class="floating-btn" onclick="toggleMenu()" aria-label="Abrir redes">
+    <img class="floating-btn-img" src="https://cdn-icons-png.flaticon.com/512/8102/8102780.png" alt="Menu"/>
+  </div>
+
+  <ul class="social-menu" id="socialMenu" aria-hidden="true">
+    <li><a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+    <li><a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
+    <li><a href="https://wa.me/593993365409" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+    <li><a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+  </ul>
+
+  <script>
+    // toggle del menú social (exacto del archivo)
+    function toggleMenu() {
+      document.getElementById("socialMenu").classList.toggle("active");
+    }
+
+    // Añadir comportamiento: cuando se pulsa "Ver Planes" llevamos al contacto (puedes cambiarlo)
+    document.querySelectorAll('.btn-ver-planes').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // efecto suave: scrollear a contacto
+        const contacto = document.getElementById('contacto');
+        if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // Soporte táctil: agregar/retirar clase 'touched' en touchstart/touchend (copiado del archivo)
+    (function() {
+      if (!('ontouchstart' in window)) return;
+      const wrappers = document.querySelectorAll('.wrapper');
+
+      wrappers.forEach(wrapper => {
+        let isTouching = false;
+
+        wrapper.addEventListener('touchstart', function(e) {
+          isTouching = true;
+          this.classList.add('touched');
+        }, { passive: true });
+
+        wrapper.addEventListener('touchmove', function(e) {
+          if (isTouching) {
+            this.classList.add('touched');
+          }
+        }, { passive: true });
+
+        wrapper.addEventListener('touchend', function(e) {
+          isTouching = false;
+          setTimeout(() => { this.classList.remove('touched'); }, 300);
+        }, { passive: true });
+
+        wrapper.addEventListener('touchcancel', function(e) {
+          isTouching = false;
+          this.classList.remove('touched');
+        }, { passive: true });
+      });
+    })();
+
+    // Año actual en footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+
+// =============== NUEVA LÓGICA PARA EL TEXTO DINÁMICO ROTATIVO ===============
+// Pre-construimos los 3 bloques de HTML completos
+const servicePhrases = [
+    'Soluciones profesionales en <span class="dynamic-services">Seguridad Electrónica</span>, Redes con Fibra Óptica, Mantenimiento Tecnológico y mas.',
+    'Soluciones profesionales en <span class="dynamic-services">Redes con Fibra Óptica</span>, Mantenimiento Tecnológico, Seguridad Electrónica y mas.',
+    'Soluciones profesionales en <span class="dynamic-services">Mantenimiento Tecnológico</span>, Seguridad Electrónica, Redes con Fibra Óptica y mas.'
+];
+const dynamicServiceContainer = document.getElementById('dynamicServiceContainer');
+let serviceIndex = 0;
+
+setInterval(() => {
+  if (dynamicServiceContainer) {
+    // Inyectamos el HTML directamente, lo que aplicará la clase .dynamic-services a la primera frase
+    dynamicServiceContainer.innerHTML = servicePhrases[serviceIndex];
+    serviceIndex = (serviceIndex + 1) % servicePhrases.length;
+  }
+}, 2600);
+  </script>
+
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageContainer = document.getElementById('image-container');
+    const images = [
+      'https://i.imgur.com/dd3reLG.png',
+      'https://i.imgur.com/qb9dzrM.png',
+      'https://i.imgur.com/AbwU3eX.png',
+      'https://i.imgur.com/pz0RKP6.png',
+      
+    ];
+
+    images.forEach((src, index) => {
+      const imgWrapper = document.createElement('div');
+            imgWrapper.classList.add(
+        'overflow-hidden',
+        'rounded-xl',
+        'shadow-md',
+        'opacity-0',
+        'transform',
+        'translate-y-10',
+        'transition-all',
+        'duration-700',
+        'ease-out',
+        'cursor-pointer', // ✅ Coma añadida aquí
+        'image-item' // Clase para identificar en JS
+      );
+      
+       imgWrapper.style.transitionDelay = `${index * 150}ms`;
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Proyecto ${index + 1}`;
+      img.classList.add('w-full', 'h-full', 'object-cover', 'transition-transform', 'duration-300', 'ease-in-out');
+
+      imgWrapper.appendChild(img);
+      imageContainer.appendChild(imgWrapper);
+
+      // Animación de entrada
+      setTimeout(() => {
+        imgWrapper.classList.remove('opacity-0', 'translate-y-10');
+        imgWrapper.classList.add('opacity-100', 'translate-y-0');
+      }, index * 150);
+
+      // Efecto hover (desktop)
+      imgWrapper.addEventListener('mouseenter', () => {
+        img.style.transform = 'scale(1.05)';
+        imgWrapper.style.boxShadow = '0 12px 24px rgba(0,0,0,0.15)';
+      });
+
+      imgWrapper.addEventListener('mouseleave', () => {
+        img.style.transform = 'scale(1)';
+        imgWrapper.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+      });
+
+      // Efecto touch (móvil/tablet)
+      let isTouched = false;
+
+      imgWrapper.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Evita scroll accidental
+        isTouched = true;
+        img.style.transform = 'scale(1.05)';
+        imgWrapper.style.boxShadow = '0 12px 24px rgba(0,0,0,0.15)';
+      });
+
+      imgWrapper.addEventListener('touchend', () => {
+        setTimeout(() => {
+          if (isTouched) {
+            img.style.transform = 'scale(1)';
+            imgWrapper.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+            isTouched = false;
+          }
+        }, 300); // Retardo para evitar parpadeo
+      });
+
+      // Opcional: también puedes añadir click para abrir lightbox o link
+      imgWrapper.addEventListener('click', () => {
+        alert(`Haz clic en Proyecto ${index + 1}`); // Reemplaza con tu acción
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
