@@ -301,17 +301,7 @@
     }
 
     /* =============== NUEVOS ESTILOS PARA EL EFECTO DE TEXTO DINÁMICO Y FONDO FLAMEANTE =============== */
-    /* Fondo flameante para la sección HERO */
-    .hero-flame-bg {
-      background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa, #1e40af);
-      background-size: 400% 400%;
-      animation: gradientFlame 15s ease infinite;
-    }
-    @keyframes gradientFlame {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    
 
     /* Texto dinámico que cambia las palabras */
     .dynamic-services {
@@ -371,10 +361,29 @@
   </header>
 
     <!-- HERO -->
-<section id="inicio" class="hero-flame-bg text-white py-20 text-center">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl md:text-6xl font-bold mb-4">Tecnología Integral para tu <span class="text-yellow-400 block">Hogar y Negocio</span></h2>
-    <!-- El script reemplazará TODO este span con el HTML completo de cada frase -->
+<!-- HERO con video de fondo -->
+<section id="inicio" class="relative py-20 text-white overflow-hidden">
+  <!-- Video de fondo -->
+  <div class="absolute inset-0 z-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="w-full h-full object-cover"
+    >
+      <source src="https://i.imgur.com/MUlWHvV.mp4" type="video/mp4">
+      Tu navegador no soporta videos.
+    </video>
+    <!-- Capa de oscurecimiento para mejorar la legibilidad -->
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  <!-- Contenido centrado encima del video -->
+  <div class="container mx-auto px-4 relative z-10 text-center">
+    <h2 class="text-4xl md:text-6xl font-bold mb-4">
+      Tecnología Integral para tu <span class="text-yellow-400 block">Hogar y Negocio</span>
+    </h2>
     <p class="max-w-3xl mx-auto text-lg md:text-xl mb-6">
       <span id="dynamicServiceContainer"></span>
     </p>
