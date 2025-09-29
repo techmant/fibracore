@@ -338,27 +338,43 @@
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-  <!-- HEADER (sencillo) -->
-  <header class="bg-white shadow sticky top-0 z-40">
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="bg-blue-600 p-2 rounded-lg">
-         <img src="https://i.imgur.com/lHr7mib.png" alt="Logo de SeguridadTotal" class="w-7 h-7 object-contain">
-        </div>
-        <div>
-          <h1 class="text-xl font-bold dynamic-blue-text">FIBRACORE</h1>
-          <div class="text-xs text-gray-500">Soluciones Profesionales</div>
-        </div>
+  <!-- HEADER (con menú responsive) -->
+<header class="bg-white shadow sticky top-0 z-40">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="bg-blue-600 p-2 rounded-lg">
+        <img src="https://i.imgur.com/lHr7mib.png" alt="Logo de SeguridadTotal" class="w-7 h-7 object-contain">
       </div>
-
-      <nav class="hidden md:flex gap-8">
-        <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
-        <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
-        <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
-        <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
-      </nav>
+      <div>
+        <h1 class="text-xl font-bold dynamic-blue-text">FIBRACORE</h1>
+        <div class="text-xs text-gray-500">Soluciones Profesionales</div>
+      </div>
     </div>
-  </header>
+
+    <!-- Botón de menú para móviles -->
+    <button id="mobileMenuButton" class="md:hidden flex flex-col justify-center items-center">
+      <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
+      <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
+      <span class="w-6 h-0.5 bg-gray-800"></span>
+    </button>
+
+    <!-- Menú de escritorio -->
+    <nav id="desktopMenu" class="hidden md:flex gap-8">
+      <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
+      <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
+      <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
+      <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
+    </nav>
+  </div>
+
+  <!-- Menú móvil (oculto por defecto) -->
+  <nav id="mobileMenu" class="hidden md:hidden flex flex-col items-center py-4 space-y-4 bg-white border-t">
+    <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
+    <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
+    <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
+    <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
+  </nav>
+</header>
 
     <!-- HERO -->
 <!-- HERO con video de fondo -->
@@ -795,5 +811,19 @@ setInterval(() => {
   });
 </script>
 
+<script>
+  // Menú móvil
+  document.getElementById('mobileMenuButton').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Cerrar menú móvil al hacer clic en un enlace
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    });
+  });
+</script>
 </body>
 </html>
