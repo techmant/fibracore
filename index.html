@@ -6,13 +6,11 @@
   <title>Fibracore-Soluciones Integrales de Seguridad y Tecnología</title>
 
   <!-- ✅ Favicon -->
-  <link rel="icon" href="https://i.imgur.com/WAfUPN0.jpeg" sizes="any">
+  <link rel="icon" href="https://i.imgur.com/WAfUPN0.jpeg">
   <link rel="icon" href="https://i.imgur.com/WAfUPN0.jpeg" sizes="192x192">
   <!-- Font Awesome -->
  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
 
   <style>
     /* =========================
@@ -97,13 +95,12 @@
       pointer-events: auto;
     }
 
-    /* posiciones cuando está activo (cuatro iconos alrededor) */
     .social-menu.active li:nth-child(1) { transform: translate(-100px, -20px); }
     .social-menu.active li:nth-child(2) { transform: translate(-70px, -90px); }
     .social-menu.active li:nth-child(3) { transform: translate(0px, -120px); }
     .social-menu.active li:nth-child(4) { transform: translate(70px, -90px); }
 
-    /* ====== NUEVO EFECTO RELIEVE TARJETAS (REEMPLAZA EL FLIP) ====== */
+    /* ====== NUEVO EFECTO RELIEVE TARJETAS ====== */
     .card-container {
       position: relative;
       width: 100%;
@@ -128,7 +125,6 @@
       display:block;
     }
 
-    /* Hover (sólo desktop con puntero) */
     @media (hover: hover) and (pointer: fine) {
       .wrapper:hover {
         transform: perspective(900px) translateY(-6%) rotateX(20deg);
@@ -164,7 +160,6 @@
       filter: drop-shadow(0 25px 40px rgba(0,0,0,0.6));
     }
 
-    /* On hover: escala la figura (la que parece 3D) */
     @media (hover: hover) and (pointer: fine) {
       .wrapper:hover ~ .character,
       .wrapper:focus ~ .character {
@@ -172,7 +167,6 @@
       }
     }
 
-    /* Botón central (Ver Planes) dentro de la tarjeta */
     .platform-logo {
       position: absolute;
       top: 18px;
@@ -203,7 +197,6 @@
     }
     .btn-ver-planes:hover { transform: translateX(-50%) scale(1.06); box-shadow: 0 12px 36px rgba(0,0,0,0.65); }
 
-    /* Responsive adjustments for tarjetas */
     @media (max-width: 1024px) {
       .card-container { max-width: 360px; height: 420px; }
       .character { width: 48%; bottom: 70px; }
@@ -214,26 +207,21 @@
       .btn-ver-planes { padding: 8px 16px; font-size: 13px; }
     }
 
-    /* Mejora táctil: aplicar clase 'touched' cuando el usuario toque la tarjeta */
     @media (hover: none) and (pointer: coarse) {
       .wrapper.touched { transform: perspective(900px) translateY(-6%) rotateX(20deg) !important; box-shadow: 0 40px 60px rgba(0,0,0,0.75) !important; }
       .wrapper.touched .background { transform: scale(1.06) !important; filter: brightness(0.95) contrast(1.05) !important; }
       .wrapper.touched ~ .character { transform: translateX(-50%) scale(1.35) translateY(-36px) !important; }
     }
 
-    /* pequeños ajustes visuales */
     .service-title { text-shadow: 0 4px 18px rgba(0,0,0,0.5); }
 
-
-    /* =============== Estilos Personalizados para este Sitio =============== */
-    /* Header mejorado */
+    /* =============== Estilos Personalizados =============== */
     header {
       background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.35), transparent);
       backdrop-filter: saturate(150%) blur(6px);
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    /* Animación para el título en el header */
     .dynamic-blue-text {
       animation: glowBlue 3s ease-in-out infinite;
     }
@@ -243,7 +231,6 @@
       100% { text-shadow: 0 0 6px rgba(37, 99, 235, .35); }
     }
 
-    /* Menú de navegación con efecto */
     .nav-link {
       position: relative;
       padding: 4px 0;
@@ -262,7 +249,6 @@
       width: 100%;
     }
 
-    /* Botones con efectos mejorados */
     .btn-animated {
       background: linear-gradient(135deg, var(--primary-blue), #0ef);
       color: #001018;
@@ -282,7 +268,6 @@
       box-shadow: 0 14px 28px rgba(37, 99, 235, .4);
     }
 
-    /* Botones secundarios */
     .btn-secondary {
       background: linear-gradient(135deg, #232a37, #121720);
       color: #e8eef6;
@@ -294,7 +279,6 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
 
-    /* Input y select del formulario */
     .form-input, .form-select {
       transition: all 0.2s ease;
       border: 1px solid #cbd5e1;
@@ -305,10 +289,6 @@
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
-    /* =============== NUEVOS ESTILOS PARA EL EFECTO DE TEXTO DINÁMICO Y FONDO FLAMEANTE =============== */
-    
-
-    /* Texto dinámico que cambia las palabras */
     .dynamic-services {
       color: #ffffff;
       font-weight: 800;
@@ -325,94 +305,156 @@
     }
 
     .image-item {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    .image-item:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
 
-.image-item:hover {
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-}
+    /* NUEVA SECCIÓN: Subservicios */
+    #subservices-section {
+      display: none;
+      padding: 60px 0;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #dbeafe);
+      border-bottom: 1px solid #bfdbfe;
+      margin-top: -1px;
+    }
+    .subservice-category {
+      margin-bottom: 24px;
+    }
+    .subservice-category h4 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #1e3a8a;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #dbeafe;
+    }
+    .subservice-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .subservice-list li {
+      padding: 6px 0;
+      color: #374151;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .back-to-services {
+      margin-top: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2563eb;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      background: white;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+      transition: all 0.2s ease;
+    }
+    .back-to-services:hover {
+      background: #eff6ff;
+      transform: translateY(-2px);
+    }
+    .whatsapp-btn {
+      background: #25d366;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+      transition: all 0.25s ease;
+      font-size: 1.1rem;
+    }
+    .whatsapp-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+    }
+    #subservice-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+    }
 
-/* Estilo para dispositivos táctiles */
-@media (hover: none) and (pointer: coarse) {
-  .image-item {
-    /* Ajustes específicos para móvil si es necesario */
-  }
+
+    /* ====== CAMBIO DE FONDO: Sección "Nuestros Servicios" ====== */
+#servicios {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #dbeafe);
+  border-bottom: 1px solid #bfdbfe;
+  margin-top: -1px;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-  <!-- HEADER (con menú responsive) -->
-<header class="bg-white shadow sticky top-0 z-40">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="bg-blue-600 p-2 rounded-lg">
-        <img src="https://i.imgur.com/lHr7mib.png" alt="Logo de SeguridadTotal" class="w-7 h-7 object-contain">
+  <!-- HEADER -->
+  <header class="bg-white shadow sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-600 p-2 rounded-lg">
+          <img src="https://i.imgur.com/lHr7mib.png" alt="Logo de SeguridadTotal" class="w-7 h-7 object-contain">
+        </div>
+        <div>
+          <h1 class="text-xl font-bold dynamic-blue-text">FIBRACORE</h1>
+          <div class="text-xs text-gray-500">Soluciones Profesionales</div>
+        </div>
       </div>
-      <div>
-        <h1 class="text-xl font-bold dynamic-blue-text">FIBRACORE</h1>
-        <div class="text-xs text-gray-500">Soluciones Profesionales</div>
-      </div>
+
+      <button id="mobileMenuButton" class="md:hidden flex flex-col justify-center items-center">
+        <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
+        <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
+        <span class="w-6 h-0.5 bg-gray-800"></span>
+      </button>
+
+      <nav id="desktopMenu" class="hidden md:flex gap-8">
+        <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
+        <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
+        <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
+        <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
+      </nav>
     </div>
 
-    <!-- Botón de menú para móviles -->
-    <button id="mobileMenuButton" class="md:hidden flex flex-col justify-center items-center">
-      <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
-      <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
-      <span class="w-6 h-0.5 bg-gray-800"></span>
-    </button>
-
-    <!-- Menú de escritorio -->
-    <nav id="desktopMenu" class="hidden md:flex gap-8">
+    <nav id="mobileMenu" class="hidden md:hidden flex flex-col items-center py-4 space-y-4 bg-white border-t">
       <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
       <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
       <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
       <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
     </nav>
-  </div>
+  </header>
 
-  <!-- Menú móvil (oculto por defecto) -->
-  <nav id="mobileMenu" class="hidden md:hidden flex flex-col items-center py-4 space-y-4 bg-white border-t">
-    <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
-    <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
-    <a href="#nosotros" class="nav-link hover:text-blue-600">Nosotros</a>
-    <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
-  </nav>
-</header>
-
-    <!-- HERO -->
-<!-- HERO con video de fondo -->
-<section id="inicio" class="relative py-20 text-white overflow-hidden">
-  <!-- Video de fondo -->
-  <div class="absolute inset-0 z-0">
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      class="w-full h-full object-cover"
-    >
-      <source src="https://i.imgur.com/MUlWHvV.mp4" type="video/mp4">
-      Tu navegador no soporta videos.
-    </video>
-    <!-- Capa de oscurecimiento para mejorar la legibilidad -->
-    <div class="absolute inset-0 bg-black/40"></div>
-  </div>
-
-  <!-- Contenido centrado encima del video -->
-  <div class="container mx-auto px-4 relative z-10 text-center">
-    <h2 class="text-4xl md:text-6xl font-bold mb-4">
-      Tecnología Integral para tu <span class="text-yellow-400 block">Hogar y Negocio</span>
-    </h2>
-    <p class="max-w-3xl mx-auto text-lg md:text-xl mb-6">
-      <span id="dynamicServiceContainer"></span>
-    </p>
-    <a href="#contacto" class="btn-animated">
-      Solicitar Cotización <i class="fas fa-arrow-right ml-3"></i>
-    </a>
-  </div>
-</section>
+  <!-- HERO -->
+  <section id="inicio" class="relative py-20 text-white overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <video autoplay muted loop playsinline class="w-full h-full object-cover">
+        <source src="https://i.imgur.com/MUlWHvV.mp4" type="video/mp4">
+        Tu navegador no soporta videos.
+      </video>
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <h2 class="text-4xl md:text-6xl font-bold mb-4">
+        Tecnología Integral para tu <span class="text-yellow-400 block">Hogar y Negocio</span>
+      </h2>
+      <p class="max-w-3xl mx-auto text-lg md:text-xl mb-6">
+        <span id="dynamicServiceContainer"></span>
+      </p>
+      <a href="#contacto" class="btn-animated">
+        Solicitar Cotización <i class="fas fa-arrow-right ml-3"></i>
+      </a>
+    </div>
+  </section>
 
   <!-- STATS -->
   <section class="py-10 bg-white">
@@ -424,8 +466,10 @@
     </div>
   </section>
 
-  <!-- SERVICIOS: cada tarjeta usa el efecto extraído del archivo -->
+  <!-- SERVICIOS -->
   <section id="servicios" class="py-16">
+
+
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
         <h3 class="text-3xl font-bold mb-2">Nuestros Servicios</h3>
@@ -435,19 +479,17 @@
       <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
         <!-- 1) Cámaras -->
         <div class="card-container mx-auto">
-          <div class="wrapper" tabindex="0" aria-label="Cámaras de Seguridad — ver planes">
+          <div class="wrapper" tabindex="0" aria-label="Cámaras de Seguridad">
             <img class="background" src="https://preview.redd.it/securing-your-home-a-comprehensive-guide-to-the-best-home-v0-74qp5dd59f2c1.jpg?width=640&crop=smart&auto=webp&s=13219603e32204a9ba0b196f0b10dab1820950c4" alt="Cámaras — fondo"/>
-            
-            <button class="btn-ver-planes" data-service="camaras">CCTV e IP</button>
+            <button class="btn-ver-planes" data-service="camaras">Cámaras de Seguridad</button>
           </div>
           <img class="character" src="https://png.pngtree.com/png-clipart/20240921/original/pngtree-cctv-security-camera-hanging-png-image_16057930.png" alt="Cámara 3D"/>
         </div>
 
         <!-- 2) Fibra Óptica -->
         <div class="card-container mx-auto">
-          <div class="wrapper" tabindex="0" aria-label="Fibra Óptica — ver planes">
+          <div class="wrapper" tabindex="0" aria-label="Fibra Óptica">
             <img class="background" src="https://www.afrontagroup.com/data/fotos/la-oportunidad-del-despliegue-de-ftth66.png" alt="Fibra — fondo"/>
-           
             <button class="btn-ver-planes" data-service="fibra">Fibra Óptica</button>
           </div>
           <img class="character" src="https://png.pngtree.com/png-vector/20250730/ourmid/pngtree-fiber-optic-cable-on-transparent-background-png-image_16916678.webp" alt="Fibra 3D"/>
@@ -455,33 +497,26 @@
 
         <!-- 3) Alarmas -->
         <div class="card-container mx-auto">
-          <div class="wrapper" tabindex="0" aria-label="Sistemas de Alarma — ver planes">
+          <div class="wrapper" tabindex="0" aria-label="Sistemas de Alarma">
             <img class="background" src="https://solutec-latam.com/wp-content/uploads/2019/07/photo-01-1-1.jpg" alt="Alarmas — fondo"/>
-           
-            <button class="btn-ver-planes" data-service="alarmas">Alarmas</button>
+            <button class="btn-ver-planes" data-service="alarmas">Sistema de Alarmas</button>
           </div>
           <img class="character" src="https://www.securicoelectronics.com/wp-content/uploads/2020/10/FIRE-ALARM-SYSTEMS.png" alt="Alarma 3D"/>
         </div>
 
-        
-
         <!-- 4) Control de Acceso -->
         <div class="card-container mx-auto">
-          <div class="wrapper" tabindex="0" aria-label="Control de Acceso — ver planes">
+          <div class="wrapper" tabindex="0" aria-label="Control de Acceso">
             <img class="background" src="https://media.istockphoto.com/id/1068548076/es/foto/personal-empuje-hacia-abajo-de-la-m%C3%A1quina-de-control-electr%C3%B3nico-con-barrido-de-dedo-a-la.jpg?s=612x612&w=0&k=20&c=Q7NR2F_ADKRIkcPKqappnMi1FXApYwGnpMgBqrzzzXM=" alt="Acceso — fondo"/>
-            
             <button class="btn-ver-planes" data-service="acceso">Control de Acceso</button>
           </div>
           <img class="character" src="https://skyteksecurity.hn/cdn/shop/products/FCX-FRENTE-p.png?v=1622224535&width=400" alt="Acceso 3D"/>
         </div>
 
-        
-
         <!-- 5) Mantenimiento de Equipos -->
         <div class="card-container mx-auto">
-          <div class="wrapper" tabindex="0" aria-label="Mantenimiento de Equipos — ver planes">
+          <div class="wrapper" tabindex="0" aria-label="Mantenimiento de Equipos">
             <img class="background" src="https://statics.somosjujuy.com.ar/2021/10/crop/63424735e2a90__400x300.webp" alt="Mantenimiento — fondo"/>
-            
             <button class="btn-ver-planes" data-service="mantenimiento">Mantenimiento PC</button>
           </div>
           <img class="character" src="https://png.pngtree.com/png-vector/20220610/ourmid/pngtree-computer-repair-icon-sign-symbol-png-image_4832151.png" alt="PC 3D"/>
@@ -490,135 +525,83 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-<section id="nosotros" class="py-16 bg-white">
-  <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <h3 class="text-3xl font-bold mb-4">Sobre Nosotros</h3>
-      <p class="text-gray-600 mb-4">Somos una empresa especializada en soluciones de seguridad electrónica y tecnología con más de 10 años de experiencia en el mercado.</p>
-      <p class="text-gray-600">Nuestro compromiso es brindar servicios de alta calidad, utilizando tecnología de vanguardia y un equipo profesional para garantizar tu tranquilidad.</p>
-    </div>
-
-    <!-- Contenedor de imágenes con animación -->
-    <div class="relative">
-      <div id="image-container" class="grid grid-cols-2 gap-4">
-        <!-- Imágenes se cargarán dinámicamente -->
+  <!-- SECCIÓN DINÁMICA DE SUBSERVICIOS (INICIALMENTE OCULTA) -->
+  <section id="subservices-section">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-8">
+        <h3 id="subservice-title" class="text-3xl font-bold"></h3>
+        <div class="back-to-services" onclick="showServicesSection()">
+          ← Volver a servicios
+        </div>
       </div>
-      <div class="absolute -bottom-6 -right-6 bg-yellow-500 p-4 rounded-lg shadow-lg text-white font-bold">+500 Proyectos</div>
+      <div id="subservice-content" class="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-blue-100"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACTO -->
-<section id="contacto" class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-10">
-      <h3 class="text-3xl md:text-4xl font-bold mb-3">Contáctanos</h3>
-      <p class="max-w-2xl mx-auto text-lg opacity-90">
-        Estamos listos para proteger tu hogar o negocio. Solicita una cotización gratuita hoy mismo.
-      </p>
+  <!-- ABOUT -->
+  <section id="nosotros" class="py-16 bg-white">
+    <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h3 class="text-3xl font-bold mb-4">Sobre Nosotros</h3>
+        <p class="text-gray-600 mb-4">Somos una empresa especializada en soluciones de seguridad electrónica y tecnología con más de 10 años de experiencia en el mercado.</p>
+        <p class="text-gray-600">Nuestro compromiso es brindar servicios de alta calidad, utilizando tecnología de vanguardia y un equipo profesional para garantizar tu tranquilidad.</p>
+      </div>
+      <div class="relative">
+        <div id="image-container" class="grid grid-cols-2 gap-4"></div>
+        <div class="absolute -bottom-6 -right-6 bg-yellow-500 p-4 rounded-lg shadow-lg text-white font-bold">+500 Proyectos</div>
+      </div>
     </div>
+  </section>
 
-    <!-- Tarjeta de formulario mejorada -->
-    <div class="max-w-2xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/20 shadow-xl">
-      <form id="contact-form">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-          <div>
-            <label class="block text-sm font-medium mb-1 opacity-90">Nombre completo</label>
-            <input
-              required
-              name="nombre"
-              class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all"
-              placeholder="Tu nombre"
-            />
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-10">
+        <h3 class="text-3xl md:text-4xl font-bold mb-3">Contáctanos</h3>
+        <p class="max-w-2xl mx-auto text-lg opacity-90">
+          Estamos listos para proteger tu hogar o negocio. Solicita una cotización gratuita hoy mismo.
+        </p>
+      </div>
+      <div class="max-w-2xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/20 shadow-xl">
+        <form id="contact-form">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label class="block text-sm font-medium mb-1 opacity-90">Nombre completo</label>
+              <input required name="nombre" class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all" placeholder="Tu nombre"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 opacity-90">Correo electrónico</label>
+              <input required type="email" name="email" class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all" placeholder="tu@email.com"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 opacity-90">Teléfono (opcional)</label>
+              <input name="telefono" class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all" placeholder="+593 99 123 4567"/>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 opacity-90">Servicio de interés</label>
+              <select name="servicio" class="form-select w-full p-3 rounded-lg bg-white/15 text-white border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 appearance-none transition-all">
+                <option value="" disabled selected>Selecciona un servicio</option>
+                <option value="camaras">Cámaras de Seguridad</option>
+                <option value="fibra">Fibra Óptica</option>
+                <option value="alarmas">Sistema de Alarmas</option>
+                <option value="acceso">Control de Acceso</option>
+                <option value="mantenimiento">Mantenimiento de Equipos</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 opacity-90">Correo electrónico</label>
-            <input
-              required
-              type="email"
-              name="email"
-              class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all"
-              placeholder="tu@email.com"
-            />
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-1 opacity-90">Mensaje</label>
+            <textarea name="mensaje" rows="4" class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all" placeholder="Cuéntanos sobre tus necesidades, ubicación, horario ideal, etc."></textarea>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 opacity-90">Teléfono (opcional)</label>
-            <input
-              name="telefono"
-              class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all"
-              placeholder="+593 99 123 4567"
-            />
+          <div class="text-center">
+            <button type="submit" class="btn-animated bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+              Enviar Mensaje
+            </button>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 opacity-90">Servicio de interés</label>
-            <select
-              name="servicio"
-              class="form-select w-full p-3 rounded-lg bg-white/15 text-white border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 appearance-none transition-all"
-            >
-              <option value="" disabled selected>Selecciona un servicio</option>
-              <option value="camaras">Cámaras de Seguridad</option>
-              <option value="fibra">Fibra Óptica</option>
-              <option value="alarmas">Sistema de Alarmas</option>
-              <option value="acceso">Control de Acceso</option>
-              <option value="mantenimiento">Mantenimiento de Equipos</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="mb-6">
-          <label class="block text-sm font-medium mb-1 opacity-90">Mensaje</label>
-          <textarea
-            name="mensaje"
-            rows="4"
-            class="form-input w-full p-3 rounded-lg bg-white/15 text-white placeholder:text-white/70 border border-white/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 transition-all"
-            placeholder="Cuéntanos sobre tus necesidades, ubicación, horario ideal, etc."
-          ></textarea>
-        </div>
-
-        <div class="text-center">
-          <button
-            type="submit"
-            class="btn-animated bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
-          >
-            Enviar Mensaje
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- Script para enviar el formulario sin redirección -->
-<script>
-  document.getElementById('contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Evita la redirección
-
-    const formData = new FormData(this);
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-
-    try {
-      const response = await fetch('https://formspree.io/f/xnngpjzy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: json
-      });
-
-      if (response.ok) {
-        alert('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
-        this.reset(); // Limpia el formulario
-      } else {
-        alert('Hubo un error. Por favor, inténtalo de nuevo.');
-      }
-    } catch (error) {
-      alert('Error de conexión. Verifica tu internet.');
-    }
-  });
-</script>
+  </section>
 
   <!-- FOOTER -->
   <footer class="bg-gray-900 text-white py-8">
@@ -630,205 +613,508 @@
     </div>
   </footer>
 
-  <!-- ===== Botón flotante y menú social (extraído del archivo que subiste) ===== -->
-  <div class="floating-btn" onclick="toggleMenu()" aria-label="Abrir redes">
-    <img class="floating-btn-img" src="https://img.icons8.com/ios7/200/FFFFFF/contacts.png" alt="Menu"/>
-  </div>
+  <!-- BOTÓN FLOTANTE -->
+<div class="floating-btn" onclick="toggleMenu()" aria-label="Abrir redes">
+  <img class="floating-btn-img" src="https://img.icons8.com/ios7/200/FFFFFF/contacts.png" alt="Menu"/>
+</div>
 
-  <ul class="social-menu" id="socialMenu" aria-hidden="true">
-    <li><a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-    <li><a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
-    <li><a href="https://wa.me/593993365409" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
-    <li><a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-  </ul>
-
+<ul class="social-menu" id="socialMenu" aria-hidden="true">
+  <li><a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+  <li><a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
+  <li>
+    <a 
+      href="https://wa.me/593993365409?text=Saludos%2C%20deseo%20informaci%C3%B3n%20sobre%20los%20servicios%20que%20ofrece." 
+      target="_blank" 
+      aria-label="WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </li>
+  <li><a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+</ul>
   <script>
-    // toggle del menú social (exacto del archivo)
-    function toggleMenu() {
-      document.getElementById("socialMenu").classList.toggle("active");
+    // ================== DATOS DE SUBSERVICIOS ==================
+    const SUBSERVICIOS = {
+      camaras: {
+        titulo: "Cámaras de Seguridad",
+        categorias: [
+          {
+            nombre: "Instalación",
+            items: [
+              "Instalación de cámaras analógicas (CCTV)",
+              "Instalación de cámaras IP / cámaras digitales",
+              "Instalación de cámaras domo / PTZ (Pan-Tilt-Zoom)",
+              "Instalación de cámaras tipo bala / bullet",
+              "Instalación de cámaras infrarrojas / visión nocturna",
+              "Instalación en interiores / exteriores",
+              "Instalación aérea / en postes / aplicaciones especiales (fábricas, almacenes, techos)"
+            ]
+          },
+          {
+            nombre: "Integración / configuración",
+            items: [
+              "Configuración de grabadores DVR (para cámaras analógicas)",
+              "Configuración de NVR (para cámaras IP)",
+              "Configuración de codificación / compresión de video (H.264, H.265)",
+              "Configuración de acceso remoto / monitoreo por app / web",
+              "Integración con sistemas de alarmas o sensores",
+              "Configuración de alertas por movimiento, zonas de detección, notificaciones por email/app"
+            ]
+          },
+          {
+            nombre: "Mantenimiento / soporte",
+            items: [
+              "Mantenimiento preventivo (limpieza de lentes, revisión de cables, aseguramiento de fijaciones)",
+              "Mantenimiento correctivo (reparación o reemplazo de piezas)",
+              "Actualización de firmware de cámaras",
+              "Verificación de funcionamiento nocturno e infrarrojo",
+              "Verificación de almacenamiento (discos duros del DVR/NVR)",
+              "Backup / recuperación de grabaciones"
+            ]
+          },
+          {
+            nombre: "Monitoreo / vigilancia",
+            items: [
+              "Servicio de monitoreo remoto 24/7 (empresa de vigilancia que revisa las imágenes)",
+              "Monitoreo en tiempo real por cliente (app / panel web)",
+              "Paquetes de monitoreo con niveles (bajo, medio, avanzado)",
+              "Servicios de envío de alertas automáticas (SMS, correo, app)"
+            ]
+          },
+          {
+            nombre: "Actualización / modernización / migración",
+            items: [
+              "Migración de sistema analógico a sistema IP",
+              "Ampliación de sistema (más cámaras, más cobertura)",
+              "Reemplazo de cámaras antiguas por modelos de mayor resolución",
+              "Integración de cámaras termográficas / térmicas",
+              "Integración con inteligencia artificial (detección facial, reconocimiento de placas, conteo de personas)"
+            ]
+          },
+          {
+            nombre: "Consultoría / diseño / auditoría de seguridad",
+            items: [
+              "Evaluación de puntos críticos de vigilancia",
+              "Diseño o plano de cobertura óptima con cámaras",
+              "Simulación de ángulos de cámara",
+              "Preparación de presupuestos / memoria técnica"
+            ]
+          },
+          {
+            nombre: "Accesorios / complementos",
+            items: [
+              "Fuente de alimentación centralizada / cámaras con PoE",
+              "Gabinetes de protección / cajas herméticas",
+              "UPS / baterías de respaldo para DVR / NVR",
+              "Cableado estructurado (CAT5e, CAT6, coaxial)",
+              "Sistemas de iluminación auxiliar (IR, reflectores)"
+            ]
+          }
+        ]
+      },
+      fibra: {
+        titulo: "Fibra Óptica",
+        categorias: [
+          {
+            nombre: "Diseño / consultoría de red",
+            items: [
+              "Estudio de rutas / trazo",
+              "Simulación de pérdidas ópticas",
+              "Cálculo de enlaces punto a punto"
+            ]
+          },
+          {
+            nombre: "Suministro de materiales",
+            items: [
+              "Cable fibra óptica (monomodo, multimodo)",
+              "Conectores (SC, LC, ST, FC)",
+              "Cajas de distribución / empalmes",
+              "Racks / paneles de parcheo óptico"
+            ]
+          },
+          {
+            nombre: "Instalación / tendido / despliegue",
+            items: [
+              "Instalación aérea / en postes",
+              "Tendido subterráneo (canalizaciones, zanjado)",
+              "Instalación interior en edificios (ductos, canaletas)",
+              "Instalación de fibra vertical (vertical backbone)"
+            ]
+          },
+          {
+            nombre: "Empalmes / fusión de fibra óptica",
+            items: [
+              "Terminación y conectorización de fibra",
+              "Pruebas / certificación / validación",
+              "Medición de pérdida óptica (OTDR)",
+              "Certificación de enlaces",
+              "Prueba de continuidad, reflectometría",
+              "Balance de potencia óptica"
+            ]
+          },
+          {
+            nombre: "Mantenimiento / monitoreo",
+            items: [
+              "Inspección visual de conectores",
+              "Limpieza de conectores / empalmes",
+              "Revisión de canalizaciones",
+              "Reparación de ductos / reemplazo de tramos",
+              "Monitoreo de rendimiento (PON, enlaces troncales)"
+            ]
+          },
+          {
+            nombre: "Ampliación / actualización / modernización",
+            items: [
+              "Escalamiento de capacidad (añadir fibra, renovar cableado)",
+              "Transformación a redes FTTH, FTTC",
+              "Integración con redes de datos: switches, routers, equipos de agregación",
+              "Migraciones de redes antiguas a fibra óptica"
+            ]
+          },
+          {
+            nombre: "Soluciones especializadas",
+            items: [
+              "Redes metropolitanas (Fibra óptica para ciudad, interconexión de sedes)",
+              "Enlaces punto a punto de media / larga distancia",
+              "Fibra óptica en ambientes especiales (subterráneos, minería, túneles)",
+              "Redes redundantes / de respaldo"
+            ]
+          }
+        ]
+      },
+      alarmas: {
+        titulo: "Sistema de Alarmas",
+        categorias: [
+          {
+            nombre: "Diseño / consultoría",
+            items: [
+              "Evaluación de riesgos del inmueble",
+              "Diseño del sistema de alarmas (zonas, sensores)",
+              "Cálculo de cobertura (cuartos, áreas críticas)"
+            ]
+          },
+          {
+            nombre: "Suministro de equipos",
+            items: [
+              "Sensores de movimiento PIR / microondas",
+              "Sensores magnéticos de puertas / ventanas",
+              "Sensores de rotura de cristales",
+              "Sirenas exteriores / interiores",
+              "Paneles de control (central de alarma)",
+              "Módulos inalámbricos / radio / GSM / Wi-Fi",
+              "Teclados / interfaces de usuario",
+              "Accesorios: baterías, cableado, estrobos"
+            ]
+          },
+          {
+            nombre: "Instalación / configuración",
+            items: [
+              "Instalación de sensores (puertas, ventanas, zonas interiores)",
+              "Interconexión con panel central",
+              "Configuración de zonas, retardo, armado / desarme",
+              "Integración con app móvil / control remoto",
+              "Configuración de reporte a monitoreo / policía"
+            ]
+          },
+          {
+            nombre: "Monitoreo",
+            items: [
+              "Servicio de monitoreo 24/7",
+              "Notificaciones mediante llamadas, SMS, app",
+              "Integración con centrales de monitoreo certificadas"
+            ]
+          },
+          {
+            nombre: "Mantenimiento / soporte",
+            items: [
+              "Verificación periódica (sensores, baterías, comunicación)",
+              "Reemplazo de baterías",
+              "Recalibración de sensores",
+              "Reparación / reemplazo de componentes defectuosos"
+            ]
+          },
+          {
+            nombre: "Actualización / modernización",
+            items: [
+              "Migración de sistema cableado a inalámbrico",
+              "Integración con domótica / IoT (activar relés, cámaras, sensores ambientales)",
+              "Ampliación de zonas / sensores",
+              "Integración con cámaras y control de acceso"
+            ]
+          }
+        ]
+      },
+      acceso: {
+        titulo: "Control de Acceso",
+        categorias: [
+          {
+            nombre: "Diseño / planificación",
+            items: [
+              "Estudio de flujo de personas",
+              "Zonificación de accesos (quién puede entrar dónde)",
+              "Integración con seguridad existente"
+            ]
+          },
+          {
+            nombre: "Suministro de equipos",
+            items: [
+              "Lectores de tarjetas RFID / prox",
+              "Teclados / teclado con pin",
+              "Lectores biométricos (huella, iris, facial)",
+              "Cerraduras eléctricas / magnéticas",
+              "Barreras / torniquetes / portillos",
+              "Controladoras / central de control",
+              "Software de gestión de acceso"
+            ]
+          },
+          {
+            nombre: "Instalación / puesta en marcha",
+            items: [
+              "Instalación de lectores y dispositivos",
+              "Cableado eléctrico / de datos",
+              "Configuración de perfiles de acceso / permisos",
+              "Integración con sistema de registro y auditoría",
+              "Sincronización con nómina / usuarios"
+            ]
+          },
+          {
+            nombre: "Mantenimiento / soporte",
+            items: [
+              "Verificación periódica de equipos",
+              "Reemplazo de lectores / cerraduras",
+              "Actualizaciones del software",
+              "Auditoría de accesos y logs",
+              "Atención de fallas"
+            ]
+          },
+          {
+            nombre: "Actualización / expansión",
+            items: [
+              "Añadir nuevos accesos / puertas",
+              "Integración con cámaras (videoverificación)",
+              "Integración con alarmas / sensores",
+              "Migrar a sistemas más avanzados (cloud, biometría)"
+            ]
+          }
+        ]
+      },
+      mantenimiento: {
+        titulo: "Mantenimiento de Equipos / PC",
+        categorias: [
+          {
+            nombre: "Diagnóstico / revisión",
+            items: [
+              "Diagnóstico general de hardware / software",
+              "Revisión de estado de discos duros, memoria, temperatura",
+              "Escaneo de malware, virus"
+            ]
+          },
+          {
+            nombre: "Mantenimiento preventivo",
+            items: [
+              "Limpieza física (polvo, ventiladores)",
+              "Aplicación de pasta térmica",
+              "Verificación de conexiones internas",
+              "Actualización de drivers, firmware"
+            ]
+          },
+          {
+            nombre: "Reparación / soporte técnico",
+            items: [
+              "Reemplazo de componentes defectuosos (disco, RAM, fuente, placa)",
+              "Reparación de fallas de software",
+              "Recuperación de datos",
+              "Evaluación y reparación de daños físicos"
+            ]
+          },
+          {
+            nombre: "Optimización / mejora",
+            items: [
+              "Upgrade de hardware (más RAM, SSD, mejor gráfica)",
+              "Optimización del sistema operativo",
+              "Configuración de copias de seguridad",
+              "Instalación de software útil (antivirus, utilitarios)"
+            ]
+          },
+          {
+            nombre: "Soporte remoto / asistencia",
+            items: [
+              "Soporte técnico remoto",
+              "Resolución de incidencias por teléfono / chat",
+              "Contrato de soporte mensual / anual"
+            ]
+          },
+          {
+            nombre: "Mantenimiento de infraestructura de TI",
+            items: [
+              "Mantenimiento de servidores locales",
+              "Mantenimiento de redes LAN / switches / routers",
+              "Seguridad informática básica (firewalls, antivirus)"
+            ]
+          }
+        ]
+      }
+    };
+
+    // ================== FUNCIONES ==================
+   function showSubservices(serviceKey) {
+  const data = SUBSERVICIOS[serviceKey];
+  if (!data) return;
+
+  document.getElementById('subservice-title').textContent = data.titulo;
+  let html = '';
+
+  data.categorias.forEach(cat => {
+    html += `<div class="subservice-category">
+      <h4>${cat.nombre}</h4>
+      <ul class="subservice-list">`;
+    cat.items.forEach(item => {
+      html += `<li>• ${item}</li>`;
+    });
+    html += `</ul></div>`;
+  });
+
+  // === MENSAJES PERSONALIZADOS POR SERVICIO ===
+  const mensajesWhatsApp = {
+    camaras: "Saludos, estoy interesado en el servicio de Cámaras de Seguridad. ¿Me puede ayudar con más información?",
+    fibra: "Hola, me gustaría recibir más información sobre el servicio de Fibra Óptica.",
+    alarmas: "Saludos, estoy interesado en el sistema de alarmas. ¿Podría darme más detalles?",
+    acceso: "Hola, quisiera información sobre el servicio de Control de Acceso.",
+    mantenimiento: "Saludos, necesito apoyo con Mantenimiento de Equipos. ¿Podemos coordinar una asesoría?"
+  };
+
+  const mensaje = encodeURIComponent(mensajesWhatsApp[serviceKey] || "Hola, estoy interesado en sus servicios.");
+  const whatsappUrl = `https://wa.me/593979383792?text=${mensaje}`;
+
+  html += `<a href="${whatsappUrl}" target="_blank" class="whatsapp-btn">
+    <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
+  </a>`;
+
+  document.getElementById('subservice-content').innerHTML = html;
+  document.getElementById('servicios').style.display = 'none';
+  document.getElementById('subservices-section').style.display = 'block';
+  document.getElementById('nosotros').style.display = 'none';
+  document.getElementById('contacto').style.display = 'none';
+}
+
+    function showServicesSection() {
+      document.getElementById('servicios').style.display = 'block';
+      document.getElementById('subservices-section').style.display = 'none';
+      document.getElementById('nosotros').style.display = 'block';
+      document.getElementById('contacto').style.display = 'block';
     }
 
-    // Añadir comportamiento: cuando se pulsa "Ver Planes" llevamos al contacto (puedes cambiarlo)
+    // Eventos en botones
     document.querySelectorAll('.btn-ver-planes').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        // efecto suave: scrollear a contacto
-        const contacto = document.getElementById('contacto');
-        if (contacto) contacto.scrollIntoView({behavior:'smooth', block:'start'});
+        const service = btn.getAttribute('data-service');
+        showSubservices(service);
       });
     });
 
-    // Soporte táctil: agregar/retirar clase 'touched' en touchstart/touchend (copiado del archivo)
+    // Soporte táctil
     (function() {
       if (!('ontouchstart' in window)) return;
       const wrappers = document.querySelectorAll('.wrapper');
-
       wrappers.forEach(wrapper => {
         let isTouching = false;
-
-        wrapper.addEventListener('touchstart', function(e) {
-          isTouching = true;
-          this.classList.add('touched');
-        }, { passive: true });
-
-        wrapper.addEventListener('touchmove', function(e) {
-          if (isTouching) {
-            this.classList.add('touched');
-          }
-        }, { passive: true });
-
-        wrapper.addEventListener('touchend', function(e) {
-          isTouching = false;
-          setTimeout(() => { this.classList.remove('touched'); }, 300);
-        }, { passive: true });
-
-        wrapper.addEventListener('touchcancel', function(e) {
-          isTouching = false;
-          this.classList.remove('touched');
-        }, { passive: true });
+        wrapper.addEventListener('touchstart', () => { isTouching = true; this.classList.add('touched'); }, { passive: true });
+        wrapper.addEventListener('touchmove', () => { if (isTouching) this.classList.add('touched'); }, { passive: true });
+        wrapper.addEventListener('touchend', () => { isTouching = false; setTimeout(() => this.classList.remove('touched'), 300); }, { passive: true });
+        wrapper.addEventListener('touchcancel', () => { isTouching = false; this.classList.remove('touched'); }, { passive: true });
       });
     })();
 
-    // Año actual en footer
+    // Footer año
     document.getElementById('y').textContent = new Date().getFullYear();
 
-
-// =============== NUEVA LÓGICA PARA EL TEXTO DINÁMICO ROTATIVO ===============
-// Pre-construimos los 3 bloques de HTML completos
-const servicePhrases = [
-    'Soluciones profesionales en <span class="dynamic-services">Seguridad Electrónica</span>, Redes con Fibra Óptica, Mantenimiento Tecnológico y mas.',
-    'Soluciones profesionales en <span class="dynamic-services">Redes con Fibra Óptica</span>, Mantenimiento Tecnológico, Seguridad Electrónica y mas.',
-    'Soluciones profesionales en <span class="dynamic-services">Mantenimiento Tecnológico</span>, Seguridad Electrónica, Redes con Fibra Óptica y mas.'
-];
-const dynamicServiceContainer = document.getElementById('dynamicServiceContainer');
-let serviceIndex = 0;
-
-setInterval(() => {
-  if (dynamicServiceContainer) {
-    // Inyectamos el HTML directamente, lo que aplicará la clase .dynamic-services a la primera frase
-    dynamicServiceContainer.innerHTML = servicePhrases[serviceIndex];
-    serviceIndex = (serviceIndex + 1) % servicePhrases.length;
-  }
-}, 2600);
-  </script>
-
-
- <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const imageContainer = document.getElementById('image-container');
-    const imageUrls = [
-      'https://i.imgur.com/dd3reLG.png',
-      'https://i.imgur.com/qb9dzrM.png',
-      'https://i.imgur.com/AbwU3eX.png',
-      'https://i.imgur.com/pz0RKP6.png'
+    // Texto dinámico
+    const servicePhrases = [
+      'Soluciones profesionales en <span class="dynamic-services">Seguridad Electrónica</span>, Redes con Fibra Óptica, Mantenimiento Tecnológico y mas.',
+      'Soluciones profesionales en <span class="dynamic-services">Redes con Fibra Óptica</span>, Mantenimiento Tecnológico, Seguridad Electrónica y mas.',
+      'Soluciones profesionales en <span class="dynamic-services">Mantenimiento Tecnológico</span>, Seguridad Electrónica, Redes con Fibra Óptica y mas.'
     ];
-
-    // Crear los contenedores de imagen una sola vez
-    const imageWrappers = imageUrls.map((src, index) => {
-      const imgWrapper = document.createElement('div');
-      imgWrapper.classList.add(
-        'overflow-hidden',
-        'rounded-xl',
-        'shadow-md',
-        'opacity-0',
-        'transform',
-        'translate-y-10',
-        'transition-all',
-        'duration-700',
-        'ease-out',
-        'cursor-pointer',
-        'image-item'
-      );
-
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `Proyecto ${index + 1}`;
-      img.classList.add('w-full', 'h-full', 'object-cover', 'transition-transform', 'duration-300', 'ease-in-out');
-
-      imgWrapper.appendChild(img);
-      return imgWrapper;
-    });
-
-    // Función para aplicar efectos interactivos
-    function attachInteractions(wrapper) {
-      const img = wrapper.querySelector('img');
-
-      // Hover (desktop)
-      wrapper.addEventListener('mouseenter', () => {
-        img.style.transform = 'scale(1.05)';
-        wrapper.style.boxShadow = '0 12px 24px rgba(0,0,0,0.15)';
-      });
-
-      wrapper.addEventListener('mouseleave', () => {
-        img.style.transform = 'scale(1)';
-        wrapper.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-      });
-
-      // Touch (móvil)
-      let isTouched = false;
-      wrapper.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        isTouched = true;
-        img.style.transform = 'scale(1.05)';
-        wrapper.style.boxShadow = '0 12px 24px rgba(0,0,0,0.15)';
-      });
-
-      wrapper.addEventListener('touchend', () => {
-        setTimeout(() => {
-          if (isTouched) {
-            img.style.transform = 'scale(1)';
-            wrapper.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-            isTouched = false;
-          }
-        }, 300);
-      });
-    }
-
-    // Aplicar interacciones a cada imagen
-    imageWrappers.forEach(wrapper => attachInteractions(wrapper));
-
-    // Mostrar imágenes con animación inicial
-    imageWrappers.forEach((wrapper, index) => {
-      wrapper.style.transitionDelay = `${index * 150}ms`;
-      imageContainer.appendChild(wrapper);
-      setTimeout(() => {
-        wrapper.classList.remove('opacity-0', 'translate-y-10');
-        wrapper.classList.add('opacity-100', 'translate-y-0');
-      }, index * 150);
-    });
-
-    // Función para barajar el array (Fisher-Yates)
-    function shuffle(array) {
-      const arr = [...array];
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-
-    // Reorganizar imágenes cada 4 segundos
+    const dynamicServiceContainer = document.getElementById('dynamicServiceContainer');
+    let serviceIndex = 0;
     setInterval(() => {
-      const shuffled = shuffle(imageWrappers);
-      // Limpiar y reinsertar en nuevo orden
-      imageContainer.innerHTML = '';
-      shuffled.forEach(wrapper => imageContainer.appendChild(wrapper));
-    }, 4000); // Cambia cada 4 segundos
-  });
-</script>
+      if (dynamicServiceContainer) {
+        dynamicServiceContainer.innerHTML = servicePhrases[serviceIndex];
+        serviceIndex = (serviceIndex + 1) % servicePhrases.length;
+      }
+    }, 2600);
 
-<script>
-  // Menú móvil
-  document.getElementById('mobileMenuButton').addEventListener('click', function() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.classList.toggle('hidden');
-  });
-
-  // Cerrar menú móvil al hacer clic en un enlace
-  document.querySelectorAll('#mobileMenu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.add('hidden');
+    // Imágenes about
+    document.addEventListener('DOMContentLoaded', function () {
+      const imageContainer = document.getElementById('image-container');
+      const imageUrls = [
+        'https://i.imgur.com/dd3reLG.png',
+        'https://i.imgur.com/qb9dzrM.png',
+        'https://i.imgur.com/AbwU3eX.png',
+        'https://i.imgur.com/pz0RKP6.png'
+      ];
+      const imageWrappers = imageUrls.map((src, index) => {
+        const imgWrapper = document.createElement('div');
+        imgWrapper.classList.add('overflow-hidden','rounded-xl','shadow-md','opacity-0','transform','translate-y-10','transition-all','duration-700','ease-out','cursor-pointer','image-item');
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Proyecto ${index + 1}`;
+        img.classList.add('w-full','h-full','object-cover');
+        imgWrapper.appendChild(img);
+        return imgWrapper;
+      });
+      imageWrappers.forEach((wrapper, index) => {
+        wrapper.style.transitionDelay = `${index * 150}ms`;
+        imageContainer.appendChild(wrapper);
+        setTimeout(() => {
+          wrapper.classList.remove('opacity-0', 'translate-y-10');
+          wrapper.classList.add('opacity-100', 'translate-y-0');
+        }, index * 150);
+      });
+      setInterval(() => {
+        const shuffled = [...imageWrappers].sort(() => Math.random() - 0.5);
+        imageContainer.innerHTML = '';
+        shuffled.forEach(wrapper => imageContainer.appendChild(wrapper));
+      }, 4000);
     });
-  });
-</script>
+
+    // Menú móvil
+    document.getElementById('mobileMenuButton').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.add('hidden');
+      });
+    });
+
+    // Formulario
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+      try {
+        const response = await fetch('https://formspree.io/f/xnngpjzy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: json
+        });
+        if (response.ok) {
+          alert('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
+          this.reset();
+        } else {
+          alert('Hubo un error. Por favor, inténtalo de nuevo.');
+        }
+      } catch (error) {
+        alert('Error de conexión. Verifica tu internet.');
+      }
+    });
+
+    // Menú social
+    function toggleMenu() {
+      document.getElementById("socialMenu").classList.toggle("active");
+    }
+  </script>
 </body>
 </html>
