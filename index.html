@@ -4,24 +4,20 @@
  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fibracore-Soluciones Integrales de Seguridad y Tecnología</title>
-
   <!-- ✅ Favicon -->
   <link rel="icon" href="https://i.imgur.com/WAfUPN0.jpeg">
   <link rel="icon" href="https://i.imgur.com/WAfUPN0.jpeg" sizes="192x192">
   <!-- Font Awesome -->
  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     /* =========================
        Estilos copiados del archivo suministrado (efecto relieve + botón)
        ========================= */
-
     :root {
       --card-radius: 16px;
       --primary-blue: #2563eb;
     }
-
     /* ====== Botón flotante (imagen) + social menu ====== */
     .floating-btn {
       position: fixed;
@@ -53,7 +49,6 @@
       pointer-events: none;
       display:block;
     }
-
     .social-menu {
       position: fixed;
       bottom: 57px;
@@ -88,18 +83,15 @@
       transform: scale(1.2) rotate(10deg);
       box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 20px rgba(255,0,200,0.9);
     }
-
     .social-menu.active li {
       opacity: 1;
       transform: scale(1);
       pointer-events: auto;
     }
-
     .social-menu.active li:nth-child(1) { transform: translate(-100px, -20px); }
     .social-menu.active li:nth-child(2) { transform: translate(-70px, -90px); }
     .social-menu.active li:nth-child(3) { transform: translate(0px, -120px); }
     .social-menu.active li:nth-child(4) { transform: translate(70px, -90px); }
-
     /* ====== NUEVO EFECTO RELIEVE TARJETAS ====== */
     .card-container {
       position: relative;
@@ -109,7 +101,6 @@
       perspective: 900px;
       margin: 0 auto;
     }
-
     .wrapper {
       position: relative;
       width: 100%;
@@ -124,7 +115,6 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
       display:block;
     }
-
     @media (hover: hover) and (pointer: fine) {
       .wrapper:hover {
         transform: perspective(900px) translateY(-6%) rotateX(20deg);
@@ -135,7 +125,6 @@
         filter: brightness(0.95) contrast(1.05);
       }
     }
-
     .background {
       width: 100%;
       height: 100%;
@@ -144,7 +133,6 @@
       transform-origin: center;
       transition: transform 0.6s ease, filter 0.6s ease;
     }
-
     .character {
       position: absolute;
       bottom: 70px;
@@ -159,14 +147,26 @@
       pointer-events: none;
       filter: drop-shadow(0 25px 40px rgba(0,0,0,0.6));
     }
-
     @media (hover: hover) and (pointer: fine) {
       .wrapper:hover ~ .character,
       .wrapper:focus ~ .character {
         transform: translateX(-50%) scale(1.35) translateY(-36px);
       }
     }
-
+    /* === CORRECCIÓN PARA MÓVILES: clase en .card-container === */
+    @media (hover: none) and (pointer: coarse) {
+      .card-container.touched .wrapper {
+        transform: perspective(900px) translateY(-6%) rotateX(20deg) !important;
+        box-shadow: 0 40px 60px rgba(0,0,0,0.75) !important;
+      }
+      .card-container.touched .wrapper .background {
+        transform: scale(1.06) !important;
+        filter: brightness(0.95) contrast(1.05) !important;
+      }
+      .card-container.touched .character {
+        transform: translateX(-50%) scale(1.35) translateY(-36px) !important;
+      }
+    }
     .platform-logo {
       position: absolute;
       top: 18px;
@@ -177,7 +177,6 @@
       transition: transform 0.2s ease;
     }
     .platform-logo:hover { transform: scale(1.06); }
-
     .btn-ver-planes {
       position: absolute;
       bottom: 16px;
@@ -196,7 +195,6 @@
       box-shadow: 0 8px 28px rgba(0,0,0,0.55);
     }
     .btn-ver-planes:hover { transform: translateX(-50%) scale(1.06); box-shadow: 0 12px 36px rgba(0,0,0,0.65); }
-
     @media (max-width: 1024px) {
       .card-container { max-width: 360px; height: 420px; }
       .character { width: 48%; bottom: 70px; }
@@ -206,22 +204,13 @@
       .character { width: 46%; bottom: 66px; }
       .btn-ver-planes { padding: 8px 16px; font-size: 13px; }
     }
-
-    @media (hover: none) and (pointer: coarse) {
-      .wrapper.touched { transform: perspective(900px) translateY(-6%) rotateX(20deg) !important; box-shadow: 0 40px 60px rgba(0,0,0,0.75) !important; }
-      .wrapper.touched .background { transform: scale(1.06) !important; filter: brightness(0.95) contrast(1.05) !important; }
-      .wrapper.touched ~ .character { transform: translateX(-50%) scale(1.35) translateY(-36px) !important; }
-    }
-
     .service-title { text-shadow: 0 4px 18px rgba(0,0,0,0.5); }
-
     /* =============== Estilos Personalizados =============== */
     header {
       background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.35), transparent);
       backdrop-filter: saturate(150%) blur(6px);
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-
     .dynamic-blue-text {
       animation: glowBlue 3s ease-in-out infinite;
     }
@@ -230,7 +219,6 @@
       50% { text-shadow: 0 0 20px rgba(37, 99, 235, .8), 0 0 30px rgba(37, 99, 235, .55); }
       100% { text-shadow: 0 0 6px rgba(37, 99, 235, .35); }
     }
-
     .nav-link {
       position: relative;
       padding: 4px 0;
@@ -248,7 +236,6 @@
     .nav-link:hover::after {
       width: 100%;
     }
-
     .btn-animated {
       background: linear-gradient(135deg, var(--primary-blue), #0ef);
       color: #001018;
@@ -267,7 +254,6 @@
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 14px 28px rgba(37, 99, 235, .4);
     }
-
     .btn-secondary {
       background: linear-gradient(135deg, #232a37, #121720);
       color: #e8eef6;
@@ -278,7 +264,6 @@
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
-
     .form-input, .form-select {
       transition: all 0.2s ease;
       border: 1px solid #cbd5e1;
@@ -288,7 +273,6 @@
       border-color: var(--primary-blue);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
-
     .dynamic-services {
       color: #ffffff;
       font-weight: 800;
@@ -303,7 +287,6 @@
       50% { text-shadow: 0 0 20px rgba(255, 255, 255, .8), 0 0 30px rgba(255, 255, 255, .55); }
       100% { text-shadow: 0 0 6px rgba(255, 255, 255, .35); }
     }
-
     .image-item {
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: all 0.3s ease;
@@ -311,7 +294,6 @@
     .image-item:hover {
       box-shadow: 0 12px 24px rgba(0,0,0,0.15);
     }
-
     /* NUEVA SECCIÓN: Subservicios */
     #subservices-section {
       display: none;
@@ -385,8 +367,6 @@
       color: #1e3a8a;
       margin-bottom: 20px;
     }
-
-
     /* ====== CAMBIO DE FONDO: Sección "Nuestros Servicios" ====== */
 #servicios {
   background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #dbeafe);
@@ -398,7 +378,6 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-
   <!-- HEADER -->
   <header class="bg-white shadow sticky top-0 z-40">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -411,13 +390,11 @@
           <div class="text-xs text-gray-500">Soluciones Profesionales</div>
         </div>
       </div>
-
       <button id="mobileMenuButton" class="md:hidden flex flex-col justify-center items-center">
         <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
         <span class="w-6 h-0.5 bg-gray-800 mb-1"></span>
         <span class="w-6 h-0.5 bg-gray-800"></span>
       </button>
-
       <nav id="desktopMenu" class="hidden md:flex gap-8">
         <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
         <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
@@ -425,7 +402,6 @@
         <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
       </nav>
     </div>
-
     <nav id="mobileMenu" class="hidden md:hidden flex flex-col items-center py-4 space-y-4 bg-white border-t">
       <a href="#inicio" class="nav-link hover:text-blue-600">Inicio</a>
       <a href="#servicios" class="nav-link hover:text-blue-600">Servicios</a>
@@ -433,7 +409,6 @@
       <a href="#contacto" class="nav-link hover:text-blue-600">Contacto</a>
     </nav>
   </header>
-
   <!-- HERO -->
   <section id="inicio" class="relative py-20 text-white overflow-hidden">
     <div class="absolute inset-0 z-0">
@@ -455,7 +430,6 @@
       </a>
     </div>
   </section>
-
   <!-- STATS -->
   <section class="py-10 bg-white">
     <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -465,17 +439,13 @@
       <div><div class="text-3xl font-bold text-blue-600">100%</div><div class="text-sm text-gray-600">Garantía de Servicio</div></div>
     </div>
   </section>
-
   <!-- SERVICIOS -->
   <section id="servicios" class="py-16">
-
-
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
         <h3 class="text-3xl font-bold mb-2">Nuestros Servicios</h3>
         <p class="text-gray-600 max-w-2xl mx-auto">Ofrecemos soluciones integrales de seguridad y tecnología para proteger lo que más valoras</p>
       </div>
-
       <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
         <!-- 1) Cámaras -->
         <div class="card-container mx-auto">
@@ -485,7 +455,6 @@
           </div>
           <img class="character" src="https://png.pngtree.com/png-clipart/20240921/original/pngtree-cctv-security-camera-hanging-png-image_16057930.png" alt="Cámara 3D"/>
         </div>
-
         <!-- 2) Fibra Óptica -->
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Fibra Óptica">
@@ -494,7 +463,6 @@
           </div>
           <img class="character" src="https://png.pngtree.com/png-vector/20250730/ourmid/pngtree-fiber-optic-cable-on-transparent-background-png-image_16916678.webp" alt="Fibra 3D"/>
         </div>
-
         <!-- 3) Alarmas -->
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Sistemas de Alarma">
@@ -503,7 +471,6 @@
           </div>
           <img class="character" src="https://www.securicoelectronics.com/wp-content/uploads/2020/10/FIRE-ALARM-SYSTEMS.png" alt="Alarma 3D"/>
         </div>
-
         <!-- 4) Control de Acceso -->
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Control de Acceso">
@@ -512,7 +479,6 @@
           </div>
           <img class="character" src="https://skyteksecurity.hn/cdn/shop/products/FCX-FRENTE-p.png?v=1622224535&width=400" alt="Acceso 3D"/>
         </div>
-
         <!-- 5) Mantenimiento de Equipos -->
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Mantenimiento de Equipos">
@@ -524,7 +490,6 @@
       </div>
     </div>
   </section>
-
   <!-- SECCIÓN DINÁMICA DE SUBSERVICIOS (INICIALMENTE OCULTA) -->
   <section id="subservices-section">
     <div class="container mx-auto px-4">
@@ -537,7 +502,6 @@
       <div id="subservice-content" class="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-blue-100"></div>
     </div>
   </section>
-
   <!-- ABOUT -->
   <section id="nosotros" class="py-16 bg-white">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
@@ -552,7 +516,6 @@
       </div>
     </div>
   </section>
-
   <!-- CONTACTO -->
   <section id="contacto" class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
     <div class="container mx-auto px-4">
@@ -602,7 +565,6 @@
       </div>
     </div>
   </section>
-
   <!-- FOOTER -->
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-4 text-center">
@@ -612,18 +574,16 @@
       <div class="text-sm text-gray-400">&copy; <span id="y"></span> FIBRACORE. Todos los derechos reservados.</div>
     </div>
   </footer>
-
   <!-- BOTÓN FLOTANTE -->
 <div class="floating-btn" onclick="toggleMenu()" aria-label="Abrir redes">
   <img class="floating-btn-img" src="https://img.icons8.com/ios7/200/FFFFFF/contacts.png" alt="Menu"/>
 </div>
-
 <ul class="social-menu" id="socialMenu" aria-hidden="true">
   <li><a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
   <li><a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
   <li>
     <a 
-      href="https://wa.me/593993365409?text=Saludos%2C%20deseo%20informaci%C3%B3n%20sobre%20los%20servicios%20que%20ofrece FIBRACORE." 
+      href="https://wa.me/593993365409?text=Saludos%2C%20deseo%20informaci%C3%B3n%20sobre%20los%20servicios%20que%20ofrece%20FIBRACORE." 
       target="_blank" 
       aria-label="WhatsApp"
     >
@@ -955,15 +915,12 @@
         ]
       }
     };
-
     // ================== FUNCIONES ==================
    function showSubservices(serviceKey) {
   const data = SUBSERVICIOS[serviceKey];
   if (!data) return;
-
   document.getElementById('subservice-title').textContent = data.titulo;
   let html = '';
-
   data.categorias.forEach(cat => {
     html += `<div class="subservice-category">
       <h4>${cat.nombre}</h4>
@@ -973,7 +930,6 @@
     });
     html += `</ul></div>`;
   });
-
   // === MENSAJES PERSONALIZADOS POR SERVICIO ===
   const mensajesWhatsApp = {
     camaras: "Saludos, estoy interesado en el servicio de Cámaras de Seguridad. ¿Me puede ayudar con más información?",
@@ -982,28 +938,23 @@
     acceso: "Hola, quisiera información sobre el servicio de Control de Acceso.",
     mantenimiento: "Saludos, necesito apoyo con Mantenimiento de Equipos. ¿Podemos coordinar una asesoría?"
   };
-
   const mensaje = encodeURIComponent(mensajesWhatsApp[serviceKey] || "Hola, estoy interesado en sus servicios.");
   const whatsappUrl = `https://wa.me/593979383792?text=${mensaje}`;
-
   html += `<a href="${whatsappUrl}" target="_blank" class="whatsapp-btn">
     <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
   </a>`;
-
   document.getElementById('subservice-content').innerHTML = html;
   document.getElementById('servicios').style.display = 'none';
   document.getElementById('subservices-section').style.display = 'block';
   document.getElementById('nosotros').style.display = 'none';
   document.getElementById('contacto').style.display = 'none';
 }
-
     function showServicesSection() {
       document.getElementById('servicios').style.display = 'block';
       document.getElementById('subservices-section').style.display = 'none';
       document.getElementById('nosotros').style.display = 'block';
       document.getElementById('contacto').style.display = 'block';
     }
-
     // Eventos en botones
     document.querySelectorAll('.btn-ver-planes').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -1011,23 +962,31 @@
         showSubservices(service);
       });
     });
-
-    // Soporte táctil
+    // Soporte táctil: CORREGIDO para móviles
     (function() {
       if (!('ontouchstart' in window)) return;
-      const wrappers = document.querySelectorAll('.wrapper');
-      wrappers.forEach(wrapper => {
+      const cards = document.querySelectorAll('.card-container');
+      cards.forEach(card => {
         let isTouching = false;
-        wrapper.addEventListener('touchstart', () => { isTouching = true; this.classList.add('touched'); }, { passive: true });
-        wrapper.addEventListener('touchmove', () => { if (isTouching) this.classList.add('touched'); }, { passive: true });
-        wrapper.addEventListener('touchend', () => { isTouching = false; setTimeout(() => this.classList.remove('touched'), 300); }, { passive: true });
-        wrapper.addEventListener('touchcancel', () => { isTouching = false; this.classList.remove('touched'); }, { passive: true });
+        card.addEventListener('touchstart', () => {
+          isTouching = true;
+          card.classList.add('touched');
+        }, { passive: true });
+        card.addEventListener('touchmove', () => {
+          if (isTouching) card.classList.add('touched');
+        }, { passive: true });
+        card.addEventListener('touchend', () => {
+          isTouching = false;
+          setTimeout(() => card.classList.remove('touched'), 300);
+        }, { passive: true });
+        card.addEventListener('touchcancel', () => {
+          isTouching = false;
+          card.classList.remove('touched');
+        }, { passive: true });
       });
     })();
-
     // Footer año
     document.getElementById('y').textContent = new Date().getFullYear();
-
     // Texto dinámico
     const servicePhrases = [
       'Soluciones profesionales en <span class="dynamic-services">Seguridad Electrónica</span>, Redes con Fibra Óptica, Mantenimiento Tecnológico y mas.',
@@ -1042,7 +1001,6 @@
         serviceIndex = (serviceIndex + 1) % servicePhrases.length;
       }
     }, 2600);
-
     // Imágenes about
     document.addEventListener('DOMContentLoaded', function () {
       const imageContainer = document.getElementById('image-container');
@@ -1076,7 +1034,6 @@
         shuffled.forEach(wrapper => imageContainer.appendChild(wrapper));
       }, 4000);
     });
-
     // Menú móvil
     document.getElementById('mobileMenuButton').addEventListener('click', function() {
       const mobileMenu = document.getElementById('mobileMenu');
@@ -1087,7 +1044,6 @@
         document.getElementById('mobileMenu').classList.add('hidden');
       });
     });
-
     // Formulario
     document.getElementById('contact-form').addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -1110,7 +1066,6 @@
         alert('Error de conexión. Verifica tu internet.');
       }
     });
-
     // Menú social
     function toggleMenu() {
       document.getElementById("socialMenu").classList.toggle("active");
