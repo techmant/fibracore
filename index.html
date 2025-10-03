@@ -57,6 +57,7 @@
       margin: 0;
       padding: 0;
       pointer-events: none;
+      z-index: 9998;
     }
     .social-menu li {
       position: absolute;
@@ -92,6 +93,7 @@
     .social-menu.active li:nth-child(2) { transform: translate(-70px, -90px); }
     .social-menu.active li:nth-child(3) { transform: translate(0px, -120px); }
     .social-menu.active li:nth-child(4) { transform: translate(70px, -90px); }
+
     /* ====== NUEVO EFECTO RELIEVE TARJETAS ====== */
     .card-container {
       position: relative;
@@ -205,6 +207,7 @@
       .btn-ver-planes { padding: 8px 16px; font-size: 13px; }
     }
     .service-title { text-shadow: 0 4px 18px rgba(0,0,0,0.5); }
+
     /* =============== Estilos Personalizados =============== */
     header {
       background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.35), transparent);
@@ -375,6 +378,99 @@
   padding-top: 40px;
   padding-bottom: 60px;
 }
+
+/* ========== ESTILOS ADICIONALES PARA LOS CAMBIOS SOLICITADOS ========== */
+
+/* 1. Estilos para el nuevo menú de WhatsApp flotante (dos botones) */
+.whatsapp-menu {
+  position: fixed;
+  bottom: 57px;
+  right: 57px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  z-index: 9997; /* Debajo del menú de redes sociales */
+}
+.whatsapp-menu li {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.4s ease;
+}
+.whatsapp-menu li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #444, #111);
+  color: #fff;
+  font-size: 22px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 15px rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+}
+.whatsapp-menu li a:hover {
+  background: linear-gradient(145deg, #ff0080, #7928ca);
+  transform: scale(1.2) rotate(10deg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 20px rgba(255,0,200,0.9);
+}
+.whatsapp-menu.active li {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+/* Posicionamos los dos botones de WhatsApp más arriba del botón original */
+.whatsapp-menu.active li:nth-child(1) { transform: translate(-100px, -100px); }
+.whatsapp-menu.active li:nth-child(2) { transform: translate(-70px, -150px); }
+
+
+/* 3. Estilos para el texto "Ver Más" en la tarjeta (reemplaza el botón) */
+.card-see-more {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(45deg, #e50914, #ff6a00);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  z-index: 11;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+  pointer-events: none; /* Para que el click funcione en la tarjeta completa */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4. Ajustes para el contenedor de la tarjeta para que el título no se superponga con el personaje */
+.card-container .wrapper {
+  padding-top: 40px; /* Espacio para el título */
+}
+
+/* ========== ESTILOS ADICIONALES PARA LOS CAMBIOS SOLICITADOS ========== */
+/* 2. ESTILO PARA EL TEXTO DEL TÍTULO (SOLO TEXTO, SIN BOTÓN) */
+.service-title-text {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  z-index: 10;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7), 0 0 4px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  pointer-events: none; /* Para que no interfiera con el click en la tarjeta */
+}
+
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
@@ -451,7 +547,10 @@
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Cámaras de Seguridad">
             <img class="background" src="https://preview.redd.it/securing-your-home-a-comprehensive-guide-to-the-best-home-v0-74qp5dd59f2c1.jpg?width=640&crop=smart&auto=webp&s=13219603e32204a9ba0b196f0b10dab1820950c4" alt="Cámaras — fondo"/>
-            <button class="btn-ver-planes" data-service="camaras">Cámaras de Seguridad</button>
+            <!-- Título del servicio (centrado en la parte superior) -->
+            <h3 class="service-title-text">Cámaras de Seguridad</h3>
+            <!-- Texto "Ver Más" (reemplaza el botón) -->
+            <div class="card-see-more" data-service="camaras">Ver Más</div>
           </div>
           <img class="character" src="https://png.pngtree.com/png-clipart/20240921/original/pngtree-cctv-security-camera-hanging-png-image_16057930.png" alt="Cámara 3D"/>
         </div>
@@ -459,7 +558,10 @@
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Fibra Óptica">
             <img class="background" src="https://www.afrontagroup.com/data/fotos/la-oportunidad-del-despliegue-de-ftth66.png" alt="Fibra — fondo"/>
-            <button class="btn-ver-planes" data-service="fibra">Fibra Óptica</button>
+            <!-- Título del servicio (centrado en la parte superior) -->
+            <h3 class="service-title-text">Fibra Óptica</h3>
+            <!-- Texto "Ver Más" (reemplaza el botón) -->
+            <div class="card-see-more" data-service="fibra">Ver Más</div>
           </div>
           <img class="character" src="https://png.pngtree.com/png-vector/20250730/ourmid/pngtree-fiber-optic-cable-on-transparent-background-png-image_16916678.webp" alt="Fibra 3D"/>
         </div>
@@ -467,7 +569,10 @@
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Sistemas de Alarma">
             <img class="background" src="https://solutec-latam.com/wp-content/uploads/2019/07/photo-01-1-1.jpg" alt="Alarmas — fondo"/>
-            <button class="btn-ver-planes" data-service="alarmas">Sistema de Alarmas</button>
+            <!-- Título del servicio (centrado en la parte superior) -->
+            <h3 class="service-title-text">Sistema de Alarmas</h3>
+            <!-- Texto "Ver Más" (reemplaza el botón) -->
+            <div class="card-see-more" data-service="alarmas">Ver Más</div>
           </div>
           <img class="character" src="https://www.securicoelectronics.com/wp-content/uploads/2020/10/FIRE-ALARM-SYSTEMS.png" alt="Alarma 3D"/>
         </div>
@@ -475,7 +580,10 @@
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Control de Acceso">
             <img class="background" src="https://media.istockphoto.com/id/1068548076/es/foto/personal-empuje-hacia-abajo-de-la-m%C3%A1quina-de-control-electr%C3%B3nico-con-barrido-de-dedo-a-la.jpg?s=612x612&w=0&k=20&c=Q7NR2F_ADKRIkcPKqappnMi1FXApYwGnpMgBqrzzzXM=" alt="Acceso — fondo"/>
-            <button class="btn-ver-planes" data-service="acceso">Control de Acceso</button>
+            <!-- Título del servicio (centrado en la parte superior) -->
+            <h3 class="service-title-text">Control de Acceso</h3>
+            <!-- Texto "Ver Más" (reemplaza el botón) -->
+            <div class="card-see-more" data-service="acceso">Ver Más</div>
           </div>
           <img class="character" src="https://skyteksecurity.hn/cdn/shop/products/FCX-FRENTE-p.png?v=1622224535&width=400" alt="Acceso 3D"/>
         </div>
@@ -483,7 +591,10 @@
         <div class="card-container mx-auto">
           <div class="wrapper" tabindex="0" aria-label="Mantenimiento de Equipos">
             <img class="background" src="https://statics.somosjujuy.com.ar/2021/10/crop/63424735e2a90__400x300.webp" alt="Mantenimiento — fondo"/>
-            <button class="btn-ver-planes" data-service="mantenimiento">Mantenimiento PC</button>
+            <!-- Título del servicio (centrado en la parte superior) -->
+            <h3 class="service-title-text">Mantenimiento PC</h3>
+            <!-- Texto "Ver Más" (reemplaza el botón) -->
+            <div class="card-see-more" data-service="mantenimiento">Ver Más</div>
           </div>
           <img class="character" src="https://png.pngtree.com/png-vector/20220610/ourmid/pngtree-computer-repair-icon-sign-symbol-png-image_4832151.png" alt="PC 3D"/>
         </div>
@@ -578,13 +689,15 @@
 <div class="floating-btn" onclick="toggleMenu()" aria-label="Abrir redes">
   <img class="floating-btn-img" src="https://img.icons8.com/ios7/200/FFFFFF/contacts.png" alt="Menu"/>
 </div>
+
+<!-- Menú de Social Media (original) -->
 <ul class="social-menu" id="socialMenu" aria-hidden="true">
   <li><a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
   <li><a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
   <li>
     <a 
-      href="https://wa.me/593993365409?text=Saludos%2C%20deseo%20informaci%C3%B3n%20sobre%20los%20servicios%20que%20ofrece%20FIBRACORE." 
-      target="_blank" 
+      href="javascript:void(0)" 
+      onclick="toggleWhatsAppMenu()"
       aria-label="WhatsApp"
     >
       <i class="fab fa-whatsapp"></i>
@@ -592,6 +705,25 @@
   </li>
   <li><a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
 </ul>
+
+<!-- NUEVO MENÚ DE WHATSAPP FLOTANTE (dos botones) -->
+<!-- NUEVO MENÚ DE WHATSAPP FLOTANTE (dos botones con imágenes) -->
+<ul class="whatsapp-menu" id="whatsappMenu" aria-hidden="true">
+  <li>
+    <a href="https://wa.me/593993365409?text=Saludos%2C%20deseo%20informaci%C3%B3n%20sobre%20los%20servicios%20que%20ofrece%20FIBRACORE." 
+       target="_blank" aria-label="WhatsApp 1">
+      <img src="https://i.imgur.com/DCq9qBt.png" alt="WhatsApp 1" width="40" height="40">
+    </a>
+  </li>
+  <li>
+    <a href="https://wa.me/593979383792?text=Saludos%2C%20estoy%20interesado%20en%20sus%20servicios." 
+       target="_blank" aria-label="WhatsApp 2">
+      <img src="https://i.imgur.com/DCq9qBt.png" alt="WhatsApp 2" width="40" height="40">
+    </a>
+  </li>
+</ul>
+
+
   <script>
     // ================== DATOS DE SUBSERVICIOS ==================
     const SUBSERVICIOS = {
@@ -955,10 +1087,10 @@
       document.getElementById('nosotros').style.display = 'block';
       document.getElementById('contacto').style.display = 'block';
     }
-    // Eventos en botones
-    document.querySelectorAll('.btn-ver-planes').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const service = btn.getAttribute('data-service');
+    // Eventos en tarjetas (click en la tarjeta completa, no solo en el texto "Ver Más")
+    document.querySelectorAll('.card-container').forEach(card => {
+      card.addEventListener('click', () => {
+        const service = card.querySelector('.card-see-more').getAttribute('data-service');
         showSubservices(service);
       });
     });
@@ -1066,9 +1198,19 @@
         alert('Error de conexión. Verifica tu internet.');
       }
     });
-    // Menú social
+    // Menú social y Menú WhatsApp
     function toggleMenu() {
+      // Alternar el menú de redes sociales
       document.getElementById("socialMenu").classList.toggle("active");
+      // Cerrar el menú de WhatsApp si estaba abierto
+      document.getElementById("whatsappMenu").classList.remove("active");
+    }
+
+    function toggleWhatsAppMenu() {
+      // Alternar el menú de WhatsApp
+      document.getElementById("whatsappMenu").classList.toggle("active");
+      // Cerrar el menú de redes sociales si estaba abierto
+      document.getElementById("socialMenu").classList.remove("active");
     }
   </script>
 </body>
