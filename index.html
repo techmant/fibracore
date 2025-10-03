@@ -1070,7 +1070,7 @@
     acceso: "Hola, quisiera información sobre el servicio de Control de Acceso.",
     mantenimiento: "Saludos, necesito apoyo con Mantenimiento de Equipos. ¿Podemos coordinar una asesoría?"
   };
-  const mensaje = encodeURIComponent(mensajesWhatsApp[serviceKey] || "Hola, estoy interesado en sus servicios.");
+  const mensaje = encodeURIComponent(mensajesWhatsApp[serviceKey] || "Hola, estoy interesado en sus servicios de FIBRACORE.");
   const whatsappUrl = `https://wa.me/593979383792?text=${mensaje}`;
   html += `<a href="${whatsappUrl}" target="_blank" class="whatsapp-btn">
     <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
@@ -1080,6 +1080,8 @@
   document.getElementById('subservices-section').style.display = 'block';
   document.getElementById('nosotros').style.display = 'none';
   document.getElementById('contacto').style.display = 'none';
+    // 👇 SCROLL SUAVE AL INICIO DE LA SECCIÓN DE SUBSERVICIOS
+  document.getElementById('subservices-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
     function showServicesSection() {
       document.getElementById('servicios').style.display = 'block';
